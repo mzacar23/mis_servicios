@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Maximiliano Zacarias — Desarrollo De Software para PYMES</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="progress"></div>
+<canvas id="particles"></canvas>
+
+<header id="header">
+  <div class="brand">
+    <div class="logo">MZ</div>
+    <div class="brand-title">Maximiliano Zacarias</div>
+  </div>
+  <nav>
+    <a href="#services">Servicios</a>
+    <a href="#why">Por qué</a>
+    <a href="#about">Sobre mí</a>
+    <a href="#linkedin">LinkedIn</a>
+    <a href="#contact" class="cta">Contacto</a>
+  </nav>
+  <button class="hamburger" id="menuBtn" aria-label="Menú">
+    <span></span>
+  </button>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#services" onclick="closeMenu()">Servicios</a>
+  <a href="#why" onclick="closeMenu()">Por qué</a>
+  <a href="#about" onclick="closeMenu()">Sobre mí</a>
+  <a href="#linkedin" onclick="closeMenu()">LinkedIn</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Contacto</a>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="kicker">¿Presupuestos imposibles? No más.</div>
+      <h1 class="hero-title">
+        Desarrollo <span class="typing">de software para tu PYME</span>
+      </h1>
+      <p class="lead">
+        Tecnología de élite y escalabilidad — 
+        <strong>Páginas Webs, sistemas de turnos online, CRM y más</strong>. 
+        Para pymes que quieren crecer de verdad.
+      </p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="scrollTo('#contact')">Solicitar Presupuesto</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="problem" class="problem reveal">
+    <h2>¿Te suena familiar?</h2>
+    <p style="color:var(--muted);font-size:1.2rem;margin-bottom:40px">
+      Estos son los problemas que enfrentan las PYMES <strong>cada vez</strong> que quieren digitalizarse:
+    </p>
+    <div class="problem-grid">
+      <div class="problem-item reveal">
+        <h3>Presupuestos de más de $90.000.000</h3>
+        <p>Te piden fortunas por sistemas básicos que podrías tener por una fracción del precio.</p>
+      </div>
+      <div class="problem-item reveal">
+        <h3>"6 meses y te entregamos"</h3>
+        <p>Promesas vagas, sin entregas parciales. Al final: sorpresas y más costos.</p>
+      </div>
+      <div class="problem-item reveal">
+        <h3>Mantenimiento mensual elevado</h3>
+        <p>Las licencias y el mantenimiento mensual no están pensados para empresas medianas</p>
+      </div>
+      <div class="problem-item reveal">
+        <h3>Muchos programadores</h3>
+        <p>A más cantidad de programadores que intervienen en el proyecto, mayor es el costo.</p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="solution" class="solution reveal">
+    <h2>Así es como lo resolvemos</h2>
+    <p style="color:var(--muted);font-size:1.2rem;margin-bottom:40px">
+      Un enfoque low cost que <strong>permite el desarrollo de tu sistema</strong> sin sacrificar calidad ni seguridad:
+    </p>
+    <div class="why-grid" style="margin-top:40px">
+      <div>
+        <div class="point reveal">
+          <h3>💰 Desarrollo Low Cost</h3>
+          <p>Un plan base, que podés aumentar según tus necesidades</p>
+        </div>
+        <div class="point reveal">
+          <h3>📅 Entregas Semanales</h3>
+          <p>Ves el progreso de tu sistema al menos 1 vez por semana</p>
+        </div>
+      </div>
+      <div>
+        <div class="point reveal">
+          <h3>🔒 Seguridad</h3>
+          <p>Desarrollo con estándares de seguridad actuales</p>
+        </div>
+        <div class="point reveal">
+          <h3>🚀 Soporte mensual si lo requerís</h3>
+          <p>No se cobra mantenimiento mensual, solo si necesitás agregar funcionalidades</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:40px">
+      <button class="btn btn-primary" onclick="scrollTo('#proof')">Mostrame las pruebas</button>
+    </div>
+  </section>
+
+  
+  <section id="proof" class="proof reveal">
+    <h2>Tener una página web inadecuada o no tenerla tiene un impacto negativo considerable en las ventas y la imagen de una empresa.</h2>
+    <div class="stats">
+      <div class="stat reveal">
+        <div class="stat-number">+70%</div>
+        <div class="stat-label">De los usuarios buscan en internet antes de realizar una compra/oferta</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-number">Visual</div>
+        <div class="stat-label">Páginas visualmente poco profesionales impacta en la visión que los usuarios tienen de las empresas</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Contar con una página web te permite estar las 24hs disponible para tus clientes</div>
+      </div>
+    </div>
+    <div style="margin-top:40px">
+      <button class="btn btn-primary" onclick="scrollTo('#services')">Ver qué puedo hacer por vos</button>
+    </div>
+  </section>
+
+  <section id="services" class="reveal" style="max-width:1200px;margin:100px auto;padding:0 6vw">
+    <h2 style="font-size:2.4rem;margin-bottom:32px;text-align:center;background:linear-gradient(90deg,var(--text),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent">
+      Servicios que ofrezco
+    </h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      <div class="card reveal">
+        <h3>Páginas Web</h3>
+        <p>Página web con la identidad visual de tu marca</p>
+      </div>
+      <div class="card reveal">
+        <h3>Sistemas a Medida</h3>
+        <p>CRM, ERP, inventarios — todo integrado y escalable.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Turnos Online</h3>
+        <p>Sistemas de reserva de turnos online para vos y tus clientes, totalmente personalizado</p>
+      </div>
+      <div class="card reveal">
+        <h3>Diseño Responsive</h3>
+        <p>Todos los sistemas se adaptan a celulares</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <button class="btn btn-primary" onclick="scrollTo('#urgency')">Quiero empezar ya</button>
+    </div>
+  </section>
+
+
+  <section id="urgency" class="urgency reveal">
+    <h2>¿Por qué elegirme?</h2>
+    <p>
+      Porque entiendo las necesidades y limitaciones de las PYMES. 
+      Mi enfoque low cost te permite acceder a tecnología de calidad sin romper el banco.
+      Además, cuento con programadores freelance disponibles que se suman a proyectos solo cuando el cliente requiera mayor velocidad de desarrollo.
+    </p>
+    <button class="btn btn-primary" onclick="scrollTo('#linkedin')">Conocé mi perfil</button>
+  </section>
+
+  <section id="about" class="reveal" style="max-width:800px;margin:100px auto;padding:0 6vw;text-align:center">
+    <h2 style="font-size:2.2rem;margin-bottom:24px">Soy tu aliado anti-presupuestos</h2>
+    <p style="color:var(--muted);font-size:1.1rem;line-height:1.8">
+      Desarrollador de software full-stack ayudando a pymes a digitalizarse 
+      <strong>sin vender un riñón</strong>.
+    </p>
+  </section>
+
+
+  <section id="linkedin" class="linkedin reveal">
+    <div class="linkedin-container">
+      <div class="linkedin-content">
+        <h2>Conectemos en LinkedIn</h2>
+        <p style="color:var(--muted);font-size:1.1rem;line-height:1.7;margin-bottom:20px">
+          Seguí mi trabajo, proyectos y actualizaciones sobre desarrollo de software.
+        </p>
+        <a href="https://www.linkedin.com/in/maximilianozacariasperfil/" target="_blank" class="linkedin-btn">
+          <svg class="linkedin-icon" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          Ver mi perfil en LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal" style="max-width:800px;margin:120px auto;padding:0 6vw">
+    <h2 style="text-align:center;font-size:2.4rem;margin-bottom:40px;background:linear-gradient(90deg,var(--text),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent">
+      ¿Listo para crecer sin gastar de más?
+    </h2>
+    <form onsubmit="sendToWhatsApp(event)" style="display:flex;flex-direction:column;gap:20px">
+      <div class="input-group">
+        <input type="text" placeholder=" " required />
+        <label>Tu nombre</label>
+      </div>
+      <div class="input-group">
+        <input type="email" placeholder=" " required />
+        <label>Tu email</label>
+      </div>
+      <div class="input-group">
+        <textarea placeholder=" " rows="5" required></textarea>
+        <label>¿Qué proyecto tenés en mente?</label>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;justify-content:center">
+        <button type="submit" class="btn btn-primary">Enviar por WhatsApp</button>
+        <button type="button" class="btn btn-ghost" onclick="scrollTo('#problem')">Ver el problema otra vez</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer style="text-align:center;padding:60px 20px;color:var(--muted);font-size:0.95rem">
+  © 2025 Maximiliano Zacarias · Desarrollo de software para PYMES.
+</footer>
+
+<script>
+
+  function sendToWhatsApp(event) {
+    event.preventDefault();
+    
+    
+    const nombre = document.querySelector('input[type="text"]').value;
+    const email = document.querySelector('input[type="email"]').value;
+    const proyecto = document.querySelector('textarea').value;
+    
+  
+    if (!nombre || !email || !proyecto) {
+      alert('Por favor completa todos los campos');
+      return;
+    }
+    
+  
+    const numeroWhatsApp = '541136449593'; // Formato: código país + número sin espacios
+    
+    // Crear el mensaje
+    const mensaje = `¡Hola! Me contacto desde tu página web.
+
+📝 *Mis datos:*
+• Nombre: ${nombre}
+• Email: ${email}
+
+💼 *Proyecto:*
+${proyecto}
+
+¡Espero tu respuesta!`;
+    
+    // Codificar el mensaje para URL
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    
+    // Crear la URL de WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+    
+    // Abrir WhatsApp
+    window.open(urlWhatsApp, '_blank');
+  }
+
+  // Progress
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.querySelector('.progress').style.width = progress + '%';
+    document.getElementById('header').classList.toggle('scrolled', h.scrollTop > 50);
+  });
+
+  // Particles
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const particles = Array.from({length: 90}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    speed: Math.random() * 1.5 + 0.5,
+    angle: Math.random() * Math.PI * 2
+  }));
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.angle += 0.01; p.x += Math.cos(p.angle) * p.speed; p.y += Math.sin(p.angle) * p.speed;
+      if (p.x < 0 || p.x > canvas.width) p.angle = Math.PI - p.angle;
+      if (p.y < 0 || p.y > canvas.height) p.angle = -p.angle;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(34, 211, 238, 0.4)'; ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Mobile Menu
+  const menuBtn = document.getElementById('menuBtn');
+  const panel = document.getElementById('mobilePanel');
+  menuBtn.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    panel.setAttribute('aria-hidden', !open);
+  });
+  function closeMenu() { panel.classList.remove('open'); }
+  function scrollTo(sel) { document.querySelector(sel).scrollIntoView({behavior:'smooth'}); closeMenu(); }
+
+  // Section Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>
