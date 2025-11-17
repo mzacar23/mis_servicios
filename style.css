@@ -424,3 +424,100 @@ nav a:hover{ color:var(--text); background:var(--glass); transform:translateY(-2
     font-size:0.85rem;
   }
 }
+
+/* Case Study Section */
+.case-study{
+  max-width:1200px; margin:120px auto; padding:0 6vw;
+}
+.case-study-container{
+  background:var(--panel); border-radius:20px; padding:50px; border:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.case-study-container::before{
+  content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(135deg,rgba(109,40,217,0.08),rgba(34,211,238,0.05));
+  z-index:0;
+}
+.case-study-content{ position:relative; z-index:1; text-align:center }
+
+.case-badge{
+  display:inline-block; padding:8px 20px; background:linear-gradient(90deg,rgba(34,211,238,0.2),rgba(109,40,217,0.15));
+  color:var(--accent2); border-radius:999px; font-weight:700; font-size:0.9rem; margin-bottom:24px;
+  border:1px solid rgba(34,211,238,0.3);
+}
+
+.case-study h2{
+  font-size:2.6rem; margin-bottom:20px; 
+  background:linear-gradient(90deg,var(--text),var(--accent2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; color:transparent;
+}
+
+.case-description{
+  color:var(--muted); font-size:1.2rem; line-height:1.7; margin-bottom:40px;
+  max-width:800px; margin-left:auto; margin-right:auto;
+}
+
+.case-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:32px; margin:40px 0;
+  text-align:left;
+}
+
+.case-before, .case-after{
+  background:rgba(255,255,255,0.02); padding:28px; border-radius:16px;
+  border:1px solid var(--border); transition:all .3s ease;
+}
+.case-before:hover, .case-after:hover{
+  transform:translateY(-4px); border-color:var(--accent2);
+}
+
+.case-before h3{
+  color:#ff6b6b; margin-bottom:16px; font-size:1.3rem;
+}
+.case-after h3{
+  color:#22d3ee; margin-bottom:16px; font-size:1.3rem;
+}
+
+.case-before ul, .case-after ul{
+  list-style:none; padding:0;
+}
+.case-before li, .case-after li{
+  color:var(--muted); margin-bottom:8px; padding-left:0;
+}
+
+.case-results{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px;
+  margin:40px 0; text-align:center;
+}
+.result-item{
+  background:rgba(255,255,255,0.03); padding:24px; border-radius:16px;
+  border:1px solid var(--border);
+}
+.result-number{
+  font-size:2.5rem; font-weight:900; color:var(--accent2); margin-bottom:8px;
+}
+.result-label{
+  color:var(--muted); font-size:0.95rem;
+}
+
+.case-cta{
+  display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:32px;
+}
+
+/* Responsive para case study */
+@media(max-width:768px){
+  .case-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .case-study-container{
+    padding:30px 20px;
+  }
+  .case-study h2{
+    font-size:2rem;
+  }
+  .case-results{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+}
