@@ -271,31 +271,6 @@
             color: var(--primary);
         }
 
-        /* Demo section */
-        .demo-card {
-            text-align: center;
-            padding: 3rem 2rem;
-        }
-
-        .demo-status {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-
-        .status-available {
-            background: #dcfce7;
-            color: var(--success);
-        }
-
-        .status-coming {
-            background: #fef3c7;
-            color: var(--warning);
-        }
-
         /* Case study */
         .case-study {
             background: var(--primary);
@@ -442,8 +417,7 @@
             </a>
             <nav class="nav-links">
                 <a href="#servicios">Servicios</a>
-                <a href="#sistemas">Sistemas Demo</a>
-                <a href="#caso">Casos</a>
+                <a href="#casos">Casos de Éxito</a>
                 <a href="#contacto" class="btn btn-primary">Contacto</a>
             </nav>
         </div>
@@ -459,8 +433,8 @@
                 Tecnología de calidad a precios accesibles.
             </p>
             <div class="hero-buttons">
-                <a href="/sistemas" class="btn btn-primary">🚀 Probar Sistemas Demo</a>
-                <a href="#contacto" class="btn btn-outline">Solicitar Presupuesto</a>
+                <a href="#contacto" class="btn btn-primary">Solicitar Presupuesto</a>
+                <a href="#casos" class="btn btn-outline">Ver Casos de Éxito</a>
             </div>
         </div>
     </section>
@@ -525,77 +499,57 @@
         </div>
     </section>
 
-    <!-- Sistemas Demo -->
-    <section id="sistemas" class="section section-alt">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Probá los sistemas antes de decidir</h2>
-                <p class="section-subtitle">
-                    No te quedes solo con palabras. Probá en vivo cómo funcionan los sistemas que desarrollo.
-                </p>
-            </div>
-            <div class="grid grid-3">
-                <div class="card demo-card">
-                    <div class="card-icon">🗓️</div>
-                    <h3>Sistema de Turnos</h3>
-                    <p>Reservas online 24/7, gestión de servicios y agenda automatizada.</p>
-                    <div class="demo-status status-available">✅ Disponible para probar</div>
-                </div>
-                <div class="card demo-card">
-                    <div class="card-icon">📦</div>
-                    <h3>Control de Stock</h3>
-                    <p>Inventario en tiempo real, alertas automáticas y reportes detallados.</p>
-                    <div class="demo-status status-coming">🚧 Próximamente</div>
-                </div>
-                <div class="card demo-card">
-                    <div class="card-icon">👥</div>
-                    <h3>Mini CRM</h3>
-                    <p>Gestión de clientes, seguimiento de oportunidades y pipeline de ventas.</p>
-                    <div class="demo-status status-coming">🚧 Próximamente</div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="/sistemas" class="btn btn-primary">Explorar Sistemas Demo</a>
-            </div>
-        </div>
-    </section>
-
     <!-- Servicios -->
-    <section id="servicios" class="section">
+    <section id="servicios" class="section section-alt">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Servicios que ofrezco</h2>
+                <p class="section-subtitle">
+                    Soluciones tecnológicas adaptadas a las necesidades de tu PYME
+                </p>
             </div>
             <div class="grid grid-2">
                 <div class="card">
                     <div class="card-icon">🌐</div>
                     <h3>Páginas Web Profesionales</h3>
-                    <p>Sitios web con la identidad visual de tu marca, adaptados a dispositivos móviles.</p>
+                    <p>Sitios web con la identidad visual de tu marca, adaptados a dispositivos móviles y optimizados para conversiones.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">⚙️</div>
                     <h3>Sistemas Personalizados</h3>
-                    <p>Desarrollo de software totalmente personalizado con base de datos, usuarios y permisos.</p>
+                    <p>Desarrollo de software totalmente personalizado con base de datos, gestión de usuarios, permisos y funcionalidades específicas.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📅</div>
                     <h3>Sistemas de Reservas</h3>
-                    <p>Aplicaciones de turnos online adaptadas a tu rubro: médico, servicios, alquileres.</p>
+                    <p>Aplicaciones de turnos online adaptadas a tu rubro: consultorios médicos, servicios profesionales, alquileres y más.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🔧</div>
-                    <h3>Mantenimiento Web</h3>
-                    <p>Mejoro y actualizo sitios web obsoletos para que funcionen como nuevos.</p>
+                    <div class="card-icon">📱</div>
+                    <h3>Aplicaciones Web</h3>
+                    <p>Aplicaciones web completas para gestión interna, CRM, control de stock, facturación y procesos específicos de tu negocio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Caso de Estudio -->
-    <section id="caso" class="section case-study">
+    <!-- Casos de Éxito -->
+    <section id="casos" class="section">
         <div class="container">
             <div class="section-header">
-                <div class="case-badge">Caso de Éxito</div>
+                <h2 class="section-title">Casos de Éxito</h2>
+                <p class="section-subtitle">
+                    Proyectos reales que transformaron la operación de estos negocios
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Caso 1: Los Olivos RX -->
+    <section class="section case-study">
+        <div class="container">
+            <div class="section-header">
+                <div class="case-badge">Centro Médico</div>
                 <h2 class="section-title">Los Olivos RX: De turnos telefónicos a reservas automáticas</h2>
                 <p class="section-subtitle">
                     Centro de radiología dental que automatizó completamente su sistema de turnos, 
@@ -611,6 +565,7 @@
                         <li>Personal sobrecargado</li>
                         <li>Errores en agendas</li>
                         <li>Pacientes en espera</li>
+                        <li>Horarios limitados de atención</li>
                     </ul>
                 </div>
                 <div class="case-column">
@@ -620,6 +575,7 @@
                         <li>Personal liberado para otras tareas</li>
                         <li>Agenda automatizada sin errores</li>
                         <li>Experiencia del paciente mejorada</li>
+                        <li>Disponibilidad completa online</li>
                     </ul>
                 </div>
             </div>
@@ -641,6 +597,62 @@
             
             <div style="text-align: center;">
                 <a href="https://www.losolivosrx.com/" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Ver sitio web</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Caso 2: Filu -->
+    <section class="section case-study" style="background: #10b981;">
+        <div class="container">
+            <div class="section-header">
+                <div class="case-badge">Aplicación Web</div>
+                <h2 class="section-title">Filu: Plataforma integral para el cuidado de mascotas</h2>
+                <p class="section-subtitle">
+                    Aplicación web que conecta dueños de mascotas con veterinarias y petshops, 
+                    centralizando el historial médico y facilitando la gestión del cuidado animal.
+                </p>
+            </div>
+            
+            <div class="case-grid">
+                <div class="case-column">
+                    <h4>🎯 Desafío</h4>
+                    <ul>
+                        <li>Historiales médicos dispersos</li>
+                        <li>Comunicación fragmentada</li>
+                        <li>Gestión manual de turnos</li>
+                        <li>Falta de seguimiento integral</li>
+                        <li>Procesos administrativos lentos</li>
+                    </ul>
+                </div>
+                <div class="case-column">
+                    <h4>✅ Solución</h4>
+                    <ul>
+                        <li>Historial médico centralizado</li>
+                        <li>Comunicación directa integrada</li>
+                        <li>Sistema de turnos automatizado</li>
+                        <li>Seguimiento completo de tratamientos</li>
+                        <li>Gestión administrativa eficiente</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div>Tipos de usuarios integrados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div>Historial digitalizado</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div>Acceso a información</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="https://filu.coma.ar" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Ver aplicación</a>
             </div>
         </div>
     </section>
