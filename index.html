@@ -1,257 +1,732 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Maximiliano Zacarias — Desarrollo de Software para PYMES</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximiliano Zacarias - Desarrollo de Software para PYMES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--surface) 0%, white 100%);
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-alt {
+            background: var(--surface);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Problem cards */
+        .problem-card {
+            border-left: 4px solid #ef4444;
+        }
+
+        .problem-card h3 {
+            color: #ef4444;
+        }
+
+        /* Solution cards */
+        .solution-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        .solution-card h3 {
+            color: var(--primary);
+        }
+
+        /* Demo section */
+        .demo-card {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .demo-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .status-available {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .status-coming {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        /* Case study */
+        .case-study {
+            background: var(--primary);
+            color: white;
+        }
+
+        .case-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .case-column {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .case-column h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .case-column ul {
+            list-style: none;
+        }
+
+        .case-column li {
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-light);
+            transition: all 0.2s;
+            pointer-events: none;
+            background: white;
+            padding: 0 0.25rem;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <div class="logo">MZ</div>
-      <div class="brand-title">Maximiliano Zacarias</div>
-    </div>
-
-    <nav>
-      <a href="#services">Servicios</a>
-      <a href="#solution">Por qué elegirme</a>
-      <a href="#about">Sobre mí</a>
-      <a href="#linkedin">LinkedIn</a>
-      <a href="#contact" class="cta">Contacto</a>
-    </nav>
-
-    <button class="hamburger" id="menuBtn" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<div class="mobile-panel" id="mobilePanel">
-  <a href="#services" onclick="closeMenu()">Servicios</a>
-  <a href="#solution" onclick="closeMenu()">Por qué elegirme</a>
-  <a href="#about" onclick="closeMenu()">Sobre mí</a>
-  <a href="#linkedin" onclick="closeMenu()">LinkedIn</a>
-  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Contacto</a>
-</div>
-
-<main>
-
-  <section class="hero">
-    <div class="hero-content">
-      <div class="kicker">Tecnología profesional sin presupuestos imposibles</div>
-      <h1 class="hero-title">
-        Desarrollo de software a medida<br>para PYMES que quieren crecer
-      </h1>
-      <p class="lead">
-        Páginas web profesionales • Sistemas de gestión • Reservas online • CRMs personalizados • Automatizaciones<br>
-        <strong>Calidad enterprise a precio accesible y con entregas transparentes.</strong>
-      </p>
-      <div class="cta-row">
-        <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-          Solicitar presupuesto sin compromiso
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section id="problem">
-    <h2>Los problemas más comunes que enfrentan las PYMES al digitalizarse</h2>
-    <div class="grid-4">
-      <div class="card">
-        <h3>Presupuestos desproporcionados</h3>
-        <p>Cotizaciones de $10–30 millones por sistemas que deberían costar mucho menos.</p>
-      </div>
-      <div class="card">
-        <h3>Tiempos eternos sin visibilidad</h3>
-        <p>“6 meses y te entregamos”… y luego meses de retrasos y costos extras.</p>
-      </div>
-      <div class="card">
-        <h3>Mantenimiento mensual caro</h3>
-        <p>Licencias y cuotas fijas que no se adaptan al tamaño real de la empresa.</p>
-      </div>
-      <div class="card">
-        <h3>Demasiadas manos en el proyecto</h3>
-        <p>Más programadores = más reuniones, más errores, más costo.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="solution">
-    <h2>Nuestra forma de trabajar</h2>
-    <div class="grid-4">
-      <div class="card">
-        <h3>Precio justo desde el inicio</h3>
-        <p>Plan base claro + módulos opcionales según tu necesidad real.</p>
-      </div>
-      <div class="card">
-        <h3>Entregas semanales</h3>
-        <p>Ves avances concretos todas las semanas. Nada de promesas vagas.</p>
-      </div>
-      <div class="card">
-        <h3>Seguridad actualizada</h3>
-        <p>Buenas prácticas de 2025–2026: HTTPS, validaciones, protección contra ataques comunes.</p>
-      </div>
-      <div class="card">
-        <h3>Soporte flexible</h3>
-        <p>Sin cuota mensual obligatoria. Pagás solo cuando querés agregar o modificar algo.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <h2>Servicios que ofrezco</h2>
-    <div class="grid-4">
-      <div class="card">
-        <h3>Páginas Web profesionales</h3>
-        <p>Diseño responsive, optimizado para móviles, alineado con tu identidad de marca.</p>
-      </div>
-      <div class="card">
-        <h3>Software a medida</h3>
-        <p>Sistemas internos con base de datos, roles de usuario, reportes y automatizaciones.</p>
-      </div>
-      <div class="card">
-        <h3>Sistemas de reservas online</h3>
-        <p>Turnos 24/7 para clínicas, talleres, alquileres, peluquerías, consultorios, etc.</p>
-      </div>
-      <div class="card">
-        <h3>Mantenimiento y mejoras</h3>
-        <p>Modernización de sitios existentes, migraciones, corrección de vulnerabilidades.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Caso Los Olivos RX -->
-  <section id="case-study" class="case-study">
-    <div class="case-study-container">
-      <div class="case-badge">Caso de éxito</div>
-      <h2>Los Olivos RX – Radiología Dental</h2>
-      <p class="case-description">
-        Pasamos de turnos 100% telefónicos a un sistema de reservas online automático que liberó al personal y mejoró la experiencia del paciente.
-      </p>
-      <div class="case-grid">
-        <div class="case-before">
-          <h3>Antes</h3>
-          <ul>
-            <li>Todo por teléfono</li>
-            <li>Personal saturado</li>
-            <li>Errores frecuentes en agenda</li>
-            <li>Pacientes esperando en línea</li>
-          </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">MZ</div>
+                Maximiliano Zacarias
+            </a>
+            <nav class="nav-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#sistemas">Sistemas Demo</a>
+                <a href="#caso">Casos</a>
+                <a href="#contacto" class="btn btn-primary">Contacto</a>
+            </nav>
         </div>
-        <div class="case-after">
-          <h3>Después</h3>
-          <ul>
-            <li>Reservas 24/7 desde celular</li>
-            <li>Agenda automática sin errores</li>
-            <li>Personal enfocado en atención</li>
-            <li>Pacientes más satisfechos</li>
-          </ul>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">Desarrollo Low Cost para PYMES</div>
+            <h1>Software profesional sin presupuestos imposibles</h1>
+            <p class="hero-subtitle">
+                Desarrollo sistemas personalizados para tu PYME: turnos online, CRM, control de stock y más. 
+                Tecnología de calidad a precios accesibles.
+            </p>
+            <div class="hero-buttons">
+                <a href="/sistemas" class="btn btn-primary">🚀 Probar Sistemas Demo</a>
+                <a href="#contacto" class="btn btn-outline">Solicitar Presupuesto</a>
+            </div>
         </div>
-      </div>
-      <div class="case-cta">
-        <a href="https://www.losolivosrx.com/" target="_blank" class="btn-ghost">Ver sitio web</a>
-        <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Quiero algo similar</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Caso Filu -->
-  <section id="case-study-filu" class="case-study">
-    <div class="case-study-container">
-      <div class="case-badge">Caso de éxito</div>
-      <h2>Filu – Plataforma para mascotas</h2>
-      <p class="case-description">
-        Conectamos dueños de mascotas con veterinarias y petshops en una sola plataforma digital geolocalizada.
-      </p>
-      <!-- el resto similar al anterior... puedes copiar/pegar y ajustar -->
-    </div>
-  </section>
+    <!-- Problemas -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Te suena familiar?</h2>
+                <p class="section-subtitle">
+                    Los problemas más comunes que enfrentan las PYMES al buscar soluciones tecnológicas
+                </p>
+            </div>
+            <div class="grid grid-2">
+                <div class="card problem-card">
+                    <h3>💸 Presupuestos de $90M+</h3>
+                    <p>Te piden fortunas por sistemas básicos que podrías tener por una fracción del precio.</p>
+                </div>
+                <div class="card problem-card">
+                    <h3>⏰ "6 meses y te entregamos"</h3>
+                    <p>Promesas vagas, sin entregas parciales. Al final: sorpresas y más costos.</p>
+                </div>
+                <div class="card problem-card">
+                    <h3>📈 Mantenimiento elevado</h3>
+                    <p>Licencias y mantenimiento mensual que no están pensados para empresas medianas.</p>
+                </div>
+                <div class="card problem-card">
+                    <h3>👥 Demasiados programadores</h3>
+                    <p>A más cantidad de programadores en el proyecto, mayor es el costo final.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="linkedin">
-    <h2>Mi perfil profesional</h2>
-    <div class="linkedin-container">
-      <p>Experiencia verificable, proyectos reales y enfoque 100% orientado a resultados para PYMES.</p>
-      <a href="https://www.linkedin.com/in/maximilianozacariasperfil/" target="_blank" class="linkedin-btn">
-        Ver perfil en LinkedIn
-      </a>
-    </div>
-  </section>
+    <!-- Soluciones -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mi enfoque diferente</h2>
+                <p class="section-subtitle">
+                    Desarrollo low cost que permite crear tu sistema sin sacrificar calidad ni seguridad
+                </p>
+            </div>
+            <div class="grid grid-2">
+                <div class="card solution-card">
+                    <h3>💰 Desarrollo Low Cost</h3>
+                    <p>Plan base que podés aumentar según tus necesidades y presupuesto disponible.</p>
+                </div>
+                <div class="card solution-card">
+                    <h3>📅 Entregas Semanales</h3>
+                    <p>Ves el progreso de tu sistema al menos 1 vez por semana, sin sorpresas.</p>
+                </div>
+                <div class="card solution-card">
+                    <h3>🔒 Seguridad Garantizada</h3>
+                    <p>Desarrollo con estándares de seguridad actuales y mejores prácticas.</p>
+                </div>
+                <div class="card solution-card">
+                    <h3>🚀 Soporte Opcional</h3>
+                    <p>No se cobra mantenimiento mensual, solo si necesitás agregar funcionalidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="contact">
-    <h2>¿Querés avanzar con tu proyecto?</h2>
-    <form onsubmit="sendToWhatsApp(event)">
-      <div class="input-group">
-        <input type="text" placeholder=" " required>
-        <label>Nombre completo</label>
-      </div>
-      <div class="input-group">
-        <input type="email" placeholder=" " required>
-        <label>Email profesional</label>
-      </div>
-      <div class="input-group">
-        <textarea placeholder=" " rows="5" required></textarea>
-        <label>Contame brevemente qué necesitás (puede ser página web, sistema de turnos, CRM, etc.)</label>
-      </div>
-      <button type="submit" class="cta">Enviar mensaje por WhatsApp</button>
-    </form>
-  </section>
+    <!-- Sistemas Demo -->
+    <section id="sistemas" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Probá los sistemas antes de decidir</h2>
+                <p class="section-subtitle">
+                    No te quedes solo con palabras. Probá en vivo cómo funcionan los sistemas que desarrollo.
+                </p>
+            </div>
+            <div class="grid grid-3">
+                <div class="card demo-card">
+                    <div class="card-icon">🗓️</div>
+                    <h3>Sistema de Turnos</h3>
+                    <p>Reservas online 24/7, gestión de servicios y agenda automatizada.</p>
+                    <div class="demo-status status-available">✅ Disponible para probar</div>
+                </div>
+                <div class="card demo-card">
+                    <div class="card-icon">📦</div>
+                    <h3>Control de Stock</h3>
+                    <p>Inventario en tiempo real, alertas automáticas y reportes detallados.</p>
+                    <div class="demo-status status-coming">🚧 Próximamente</div>
+                </div>
+                <div class="card demo-card">
+                    <div class="card-icon">👥</div>
+                    <h3>Mini CRM</h3>
+                    <p>Gestión de clientes, seguimiento de oportunidades y pipeline de ventas.</p>
+                    <div class="demo-status status-coming">🚧 Próximamente</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/sistemas" class="btn btn-primary">Explorar Sistemas Demo</a>
+            </div>
+        </div>
+    </section>
 
-</main>
+    <!-- Servicios -->
+    <section id="servicios" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Servicios que ofrezco</h2>
+            </div>
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Páginas Web Profesionales</h3>
+                    <p>Sitios web con la identidad visual de tu marca, adaptados a dispositivos móviles.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Sistemas Personalizados</h3>
+                    <p>Desarrollo de software totalmente personalizado con base de datos, usuarios y permisos.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Sistemas de Reservas</h3>
+                    <p>Aplicaciones de turnos online adaptadas a tu rubro: médico, servicios, alquileres.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔧</div>
+                    <h3>Mantenimiento Web</h3>
+                    <p>Mejoro y actualizo sitios web obsoletos para que funcionen como nuevos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  © 2026 Maximiliano Zacarias – Desarrollo de software profesional para PYMES
-</footer>
+    <!-- Caso de Estudio -->
+    <section id="caso" class="section case-study">
+        <div class="container">
+            <div class="section-header">
+                <div class="case-badge">Caso de Éxito</div>
+                <h2 class="section-title">Los Olivos RX: De turnos telefónicos a reservas automáticas</h2>
+                <p class="section-subtitle">
+                    Centro de radiología dental que automatizó completamente su sistema de turnos, 
+                    eliminando la gestión manual y mejorando la experiencia del paciente.
+                </p>
+            </div>
+            
+            <div class="case-grid">
+                <div class="case-column">
+                    <h4>❌ Antes</h4>
+                    <ul>
+                        <li>Turnos solo por teléfono</li>
+                        <li>Personal sobrecargado</li>
+                        <li>Errores en agendas</li>
+                        <li>Pacientes en espera</li>
+                    </ul>
+                </div>
+                <div class="case-column">
+                    <h4>✅ Después</h4>
+                    <ul>
+                        <li>Reservas 24/7 desde el celular</li>
+                        <li>Personal liberado para otras tareas</li>
+                        <li>Agenda automatizada sin errores</li>
+                        <li>Experiencia del paciente mejorada</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">80%</div>
+                    <div>Menos llamadas telefónicas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div>Disponibilidad de reservas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div>Automatización del proceso</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="https://www.losolivosrx.com/" target="_blank" class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Ver sitio web</a>
+            </div>
+        </div>
+    </section>
 
-<script>
-  function sendToWhatsApp(e) {
-    e.preventDefault();
-    const nombre   = document.querySelector('input[type="text"]').value;
-    const email    = document.querySelector('input[type="email"]').value;
-    const proyecto = document.querySelector('textarea').value;
+    <!-- Contacto -->
+    <section id="contacto" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Listo para digitalizar tu negocio?</h2>
+                <p class="section-subtitle">
+                    Contame sobre tu proyecto y te envío un presupuesto personalizado
+                </p>
+            </div>
+            <form class="contact-form" onsubmit="sendToWhatsApp(event)">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder=" " required>
+                    <label class="form-label">Tu nombre</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder=" " required>
+                    <label class="form-label">Tu email</label>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-input" rows="4" placeholder=" " required></textarea>
+                    <label class="form-label">¿Qué proyecto tenés en mente?</label>
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-primary">Enviar por WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-    if (!nombre || !email || !proyecto) {
-      alert('Por favor completa todos los campos');
-      return;
-    }
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Maximiliano Zacarias · Desarrollo de software para PYMES</p>
+    </footer>
 
-    const numero = '541136449593';
-    const texto = `Hola Maximiliano!\n\nMe llamo *${nombre}*\nEmail: ${email}\n\nProyecto:\n${proyecto}\n\nGracias!`;
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-  }
+    <script>
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            
+            const nombre = document.querySelector('input[type="text"]').value;
+            const email = document.querySelector('input[type="email"]').value;
+            const proyecto = document.querySelector('textarea').value;
+            
+            if (!nombre || !email || !proyecto) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            const numeroWhatsApp = '541136449593';
+            
+            const mensaje = `¡Hola! Me contacto desde tu página web.
 
-  // Menú móvil
-  const menuBtn = document.getElementById('menuBtn');
-  const panel = document.getElementById('mobilePanel');
+📝 *Mis datos:*
+• Nombre: ${nombre}
+• Email: ${email}
 
-  menuBtn.addEventListener('click', () => {
-    panel.classList.toggle('open');
-  });
+💼 *Proyecto:*
+${proyecto}
 
-  function closeMenu() {
-    panel.classList.remove('open');
-  }
+¡Espero tu respuesta!`;
+            
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+            
+            window.open(urlWhatsApp, '_blank');
+        }
 
-  // Scroll suave + cerrar menú móvil al clickear link
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-        closeMenu();
-      }
-    });
-  });
-</script>
+        // Scroll suave para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
 
 
 
