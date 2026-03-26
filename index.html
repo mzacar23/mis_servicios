@@ -13,13 +13,13 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --text: #1e293b;
-            --text-light: #64748b;
+            --primary: #1a56db;
+            --primary-dark: #1344b8;
+            --text: #0f172a;
+            --text-light: #374151;
             --bg: #ffffff;
-            --surface: #f8fafc;
-            --border: #e2e8f0;
+            --surface: #f1f5f9;
+            --border: #cbd5e1;
             --success: #10b981;
             --warning: #f59e0b;
         }
@@ -82,9 +82,13 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-light);
+            color: #4b5563;
             font-weight: 500;
             transition: color 0.2s;
+        }
+
+        .nav-links a.btn-primary {
+            color: white;
         }
 
         .nav-links a:hover {
@@ -156,7 +160,7 @@
 
         .hero-subtitle {
             font-size: 1.25rem;
-            color: var(--text-light);
+            color: #374151;
             margin-bottom: 2.5rem;
             max-width: 700px;
             margin-left: auto;
@@ -198,7 +202,7 @@
 
         .section-subtitle {
             font-size: 1.2rem;
-            color: var(--text-light);
+            color: #374151;
             max-width: 600px;
             margin: 0 auto;
         }
@@ -224,56 +228,82 @@
         /* Cards */
         .card {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            padding: 2rem 2rem 2rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.10), 0 0 1px rgba(0,0,0,0.06);
         }
 
         .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
+            font-size: 1.6rem;
+            margin-bottom: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #f1f5f9;
+            border-radius: 12px;
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
             color: var(--text);
         }
 
         .card p {
-            color: var(--text-light);
-            line-height: 1.6;
+            color: #4b5563;
+            line-height: 1.65;
+            font-size: 0.95rem;
         }
 
-        /* Problem cards */
+        /* Problem cards — sin borde rojo, ícono con fondo suave */
         .problem-card {
-            border-left: 4px solid #ef4444;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .problem-card .card-icon {
+            background: #fff1f2;
         }
 
         .problem-card h3 {
-            color: #ef4444;
+            color: var(--text);
         }
 
-        /* Solution cards */
+        /* Solution cards — sin borde azul mate */
         .solution-card {
-            border-left: 4px solid var(--primary);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .solution-card .card-icon {
+            background: #eff6ff;
         }
 
         .solution-card h3 {
-            color: var(--primary);
+            color: var(--text);
         }
 
         /* Case study */
         .case-study {
             background: var(--primary);
+            color: white;
+        }
+
+        .case-study .section-title,
+        .case-study .section-subtitle,
+        .case-study p,
+        .case-study h2,
+        .case-study h3,
+        .case-study h4,
+        .case-study li {
             color: white;
         }
 
@@ -364,7 +394,7 @@
             position: absolute;
             top: 1rem;
             left: 1rem;
-            color: var(--text-light);
+            color: #4b5563;
             transition: all 0.2s;
             pointer-events: none;
             background: white;
@@ -602,7 +632,7 @@
     </section>
 
     <!-- Caso 2: Filu -->
-    <section class="section case-study" style="background: #10b981;">
+    <section class="section case-study" style="background: #1344b8;">
         <div class="container">
             <div class="section-header">
                 <div class="case-badge">Aplicación Web</div>
@@ -736,9 +766,31 @@ ${proyecto}
                 }
             });
         });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.card, .section-header, .case-column, .stat-item, .hero-container');
+        revealEls.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(28px)';
+            el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // stagger siblings
+                    const siblings = [...entry.target.parentElement.children].filter(c => revealEls.has ? true : c.style.opacity === '0');
+                    const idx = [...entry.target.parentElement.children].indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, idx * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
-
-
-
