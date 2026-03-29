@@ -844,7 +844,20 @@ window.addEventListener('scroll', () => {
 const words = ['software inteligente'];
 let wi = 0, ci = 0, del = false;
 const tw = document.getElementById('tw');
+
+// Función para verificar si el elemento está visible
+function isElementVisible(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+}
+
 function typeLoop() {
+    // Solo ejecutar si el elemento está visible
+    if (!isElementVisible(tw)) {
+        setTimeout(typeLoop, 500); // Verificar cada 500ms
+        return;
+    }
+    
     const w = words[wi];
     if (!del) {
         tw.textContent = w.slice(0, ++ci);
@@ -856,7 +869,9 @@ function typeLoop() {
         setTimeout(typeLoop, 32);
     }
 }
+
 setTimeout(typeLoop, 900);
+
 
 /* ── MAGNETIC BUTTONS ── */
 document.querySelectorAll('[data-magnetic]').forEach(btn => {
