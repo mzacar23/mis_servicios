@@ -31,6 +31,17 @@
             cursor: none;
         }
 
+        @media (max-width: 992px) {
+            * {
+                cursor: auto !important;
+            }
+
+            #cursor,
+            #cursor-follower {
+                display: none !important;
+            }
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
@@ -108,6 +119,12 @@
         .nav-links {
             display: flex;
             gap: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hiding links on mobile to avoid overlap */
+            }
         }
 
         .nav-links a {
@@ -190,6 +207,27 @@
             letter-spacing: 1px;
             display: inline-block;
             transition: all 0.3s;
+        }
+
+        .btn-case {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-case:hover {
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.05);
         }
 
         /* --- Sections --- */
@@ -382,7 +420,7 @@
 
     <nav>
         <a href="#" class="nav-logo">
-            <div></div>MZACAR SOFTWARE IA
+            <div></div>MZACAR DEVELOPER
         </a>
         <div class="nav-links">
             <a href="#problemas">Fricción</a>
@@ -485,11 +523,12 @@
                         <p style="font-size: 0.8rem; text-transform: uppercase;">Uptime</p>
                     </div>
                 </div>
+                <a href="https://www.losolivosrx.com/" target="_blank" class="btn-case">Ver Sitio Web</a>
             </div>
-            <div class="case-image">
+            <a href="https://www.losolivosrx.com/" target="_blank" class="case-image">
                 <img src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1776994837/La_tecnolog%C3%ADa_en_la_odontolog%C3%ADa_contempor%C3%A1nea_jflseg.jpg"
                     alt="Los Olivos RX">
-            </div>
+            </a>
         </div>
         <div class="case-item reveal">
             <div class="case-content">
@@ -508,11 +547,12 @@
                         <p style="font-size: 0.8rem; text-transform: uppercase;">UX Grade</p>
                     </div>
                 </div>
+                <a href="https://filu.com.ar" target="_blank" class="btn-case">Ver Aplicación</a>
             </div>
-            <div class="case-image">
+            <a href="https://filu.com.ar" target="_blank" class="case-image">
                 <img src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1776994676/AI_Chatbot_Development__A_Complete_Guide_otyllw.jpg"
                     alt="Filu App">
-            </div>
+            </a>
         </div>
     </section>
 
