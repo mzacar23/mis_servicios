@@ -561,14 +561,18 @@
         <div class="form-section reveal">
             <div class="form-container">
                 <h2 style="font-size: 3rem; margin-bottom: 4rem; font-weight: 900;">¿Hablamos de tu proyecto?</h2>
-                <form>
-                    <div class="input-group"><label>Identificación</label><input type="text"
-                            placeholder="Tu nombre o empresa" required></div>
-                    <div class="input-group"><label>El desafío</label><textarea rows="1"
-                            placeholder="¿Qué proceso quieres automatizar?" required></textarea></div>
-                    <button type="submit" class="btn-primary" style="width: 100%; padding: 2rem;">Enviar
-                        Requerimiento</button>
+                <form id="wsp-form">
+                    <div class="input-group">
+                        <label>Identificación</label>
+                        <input id="nombre" type="text" placeholder="Tu nombre o empresa" required>
+                    </div>
+                    <div class="input-group">
+                        <label>El desafío</label>
+                        <textarea id="desafio" rows="1" placeholder="¿Qué proceso quieres automatizar?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 2rem;">Enviar Requerimiento</button>
                 </form>
+
             </div>
         </div>
     </section>
@@ -680,6 +684,16 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+      document.getElementById('wsp-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const desafio = document.getElementById('desafio').value.trim();
+    const mensaje = `Hola! Soy ${nombre}. Quiero automatizar: ${desafio}`;
+    window.open(`https://wa.me/5491136449593?text=${encodeURIComponent(mensaje)}`, '_blank');
+});
+  
     </script>
 </body>
 
