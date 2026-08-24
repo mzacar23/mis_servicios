@@ -4,42 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maximiliano Zacarias | Arquitectura de Software & IA</title>
+    <title>Maximiliano Zacarias | Software a medida para Vaca Muerta</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            --bg: #0a0c10;
-            --surface: rgba(255, 255, 255, 0.03);
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.4);
-            --text: #ffffff;
-            --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --radius: 30px;
-            /* Restaurado a los bordes redondeados premium */
+            --bg: #0a0b0d;
+            --bg-elevated: #101216;
+            --surface: rgba(255, 255, 255, 0.035);
+            --surface-solid: #131519;
+            --border: rgba(255, 255, 255, 0.10);
+            --border-strong: rgba(255, 255, 255, 0.20);
+            --accent: #e8720c;
+            --accent-soft: rgba(232, 114, 12, 0.14);
+            --steel: #5c8a9c;
+            --steel-soft: rgba(92, 138, 156, 0.16);
+            --text: #f2efea;
+            --text-dim: #99a0a8;
+            --text-faint: #565b62;
+            --radius: 4px;
+            --radius-lg: 6px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
         }
 
-        @media (max-width: 992px) {
-            * {
-                cursor: auto !important;
-            }
-
-            #cursor,
-            #cursor-follower {
-                display: none !important;
-            }
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -47,33 +45,49 @@
             background-color: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.5;
+            line-height: 1.55;
+            cursor: default;
         }
 
-        /* --- Custom Cursor --- */
-        #cursor {
-            width: 8px;
-            height: 8px;
+        ::selection {
+            background: var(--accent);
+            color: #0a0b0d;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* --- Custom cursor: precision crosshair, desktop only --- */
+        #cursor-dot {
+            width: 5px;
+            height: 5px;
             background: var(--accent);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 10000;
-            box-shadow: 0 0 10px var(--accent);
         }
 
-        #cursor-follower {
-            width: 35px;
-            height: 35px;
-            border: 1px solid var(--accent);
-            border-radius: 50%;
+        #cursor-ring {
+            width: 26px;
+            height: 26px;
+            border: 1px solid var(--border-strong);
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease;
+            transition: transform 0.15s ease, border-color 0.2s ease;
         }
 
-        /* --- High Contrast Neural Background (Las líneas que pediste) --- */
+        @media (max-width: 992px) {
+            #cursor-dot, #cursor-ring { display: none !important; }
+        }
+
+        /* --- Background: seismic contour lines --- */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -81,7 +95,23 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.8;
+            opacity: 0.55;
+        }
+
+        #bg-canvas + .bg-fade {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, transparent 0%, var(--bg) 78%);
+        }
+
+        /* --- Hazard strip, used as a deliberate section device --- */
+        .hazard-strip {
+            height: 5px;
+            width: 100%;
+            background: repeating-linear-gradient(135deg, var(--accent) 0 14px, #1a1b1e 14px 28px);
+            opacity: 0.9;
         }
 
         /* --- Navbar --- */
@@ -89,265 +119,623 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1.3rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 2000;
-            background: rgba(10, 12, 16, 0.8);
-            backdrop-filter: blur(15px);
+            background: rgba(10, 11, 13, 0.86);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
         }
 
         .nav-logo {
-            font-size: 1.2rem;
-            font-weight: 800;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-decoration: none;
-            color: white;
+            color: var(--text);
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 10px;
+            text-transform: uppercase;
         }
 
-        .nav-logo div {
-            width: 10px;
-            height: 10px;
+        .nav-logo .mark {
+            width: 9px;
+            height: 9px;
             background: var(--accent);
-            border-radius: 2px;
+        }
+
+        .nav-logo .sub {
+            color: var(--text-faint);
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            margin-left: 2px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2.4rem;
+            align-items: center;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Hiding links on mobile to avoid overlap */
-            }
+        @media (max-width: 860px) {
+            .nav-links { display: none; }
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dim);
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s;
+            letter-spacing: 1.5px;
+            transition: color 0.25s;
+            position: relative;
         }
 
-        .nav-links a:hover {
+        .nav-links a::before {
+            content: "";
             color: var(--accent);
         }
 
-        /* --- Split Hero (Estructura que te gustó) --- */
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-cta {
+            border: 1px solid var(--border-strong);
+            padding: 0.55rem 1.2rem;
+            color: var(--text) !important;
+            transition: all 0.25s;
+        }
+
+        .nav-cta:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        /* --- Hero --- */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 5% 60px;
-            gap: 4rem;
+            padding: 130px 5% 60px;
+            gap: 4.5rem;
         }
 
-        .hero-left {
-            flex: 1;
-            z-index: 2;
+        .hero-left { flex: 1.05; z-index: 2; }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.6rem;
         }
 
-        .hero-right {
-            flex: 1.2;
-            position: relative;
-            height: 600px;
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .eyebrow::before {
+            content: "";
+            width: 22px;
+            height: 1px;
+            background: var(--accent);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -2px;
-            margin-bottom: 2rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            margin-bottom: 1.8rem;
+            text-transform: uppercase;
         }
 
-        .hero h1 span {
+        .hero h1 em {
+            font-style: normal;
             color: var(--accent);
-            display: block;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.08rem;
             color: var(--text-dim);
-            max-width: 500px;
-            margin-bottom: 3rem;
+            max-width: 520px;
+            margin-bottom: 2.6rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn-primary {
             background: var(--accent);
-            color: white;
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
+            color: #14100a;
+            padding: 1rem 2.2rem;
+            border-radius: var(--radius);
             text-decoration: none;
-            font-weight: 800;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-size: 0.78rem;
             display: inline-block;
-            transition: all 0.3s;
+            border: 1px solid var(--accent);
+            transition: all 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn-ghost {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-strong);
+            padding-bottom: 4px;
+            transition: all 0.25s;
+        }
+
+        .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.6rem;
+            margin-top: 3.2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            max-width: 520px;
+        }
+
+        .hero-stats div h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .hero-stats div p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* --- Signature element: live drilling log panel --- */
+        .hero-right {
+            flex: 1;
+            position: relative;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--surface-solid), #0e1013);
+            overflow: hidden;
+        }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .log-header .title {
+            font-size: 0.68rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .log-live {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.62rem;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .log-live .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 1.6s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+        }
+
+        .log-body {
+            display: flex;
+            height: 330px;
+        }
+
+        .log-axis {
+            width: 56px;
+            border-right: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-faint);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 8px;
+        }
+
+        .log-chart { flex: 1; position: relative; }
+        .log-chart canvas { width: 100%; height: 100%; display: block; }
+
+        .log-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--border);
+        }
+
+        .log-stat {
+            padding: 1.1rem 1.2rem;
+            border-right: 1px solid var(--border);
+        }
+
+        .log-stat:last-child { border-right: none; }
+
+        .log-stat .val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .log-stat .val span {
+            font-size: 0.6rem;
+            color: var(--text-faint);
+            font-weight: 400;
+        }
+
+        .log-stat .lbl {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; padding-top: 150px; }
+            .hero-right { width: 100%; }
+            .hero-stats { flex-wrap: wrap; gap: 1.6rem; }
+        }
+
+        /* --- Sections --- */
+        section { padding: 130px 5%; max-width: 1360px; margin: 0 auto; }
+
+        .section-header {
+            margin-bottom: 4.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .section-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.3px;
+            max-width: 640px;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            max-width: 380px;
+            font-size: 0.98rem;
+        }
+
+        /* --- Cards --- */
+        .grid {
+            display: grid;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+        @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--bg);
+            padding: 3rem 2.4rem;
+            transition: background 0.3s ease;
+        }
+
+        .card:hover { background: var(--surface-solid); }
+
+        .card-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1.6rem;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        .card p { color: var(--text-dim); font-size: 0.98rem; }
+
+        /* --- Servicios (icon-style bars) --- */
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.4rem 0;
+            border-bottom: 1px solid var(--border);
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .service-row:first-of-type { border-top: 1px solid var(--border); }
+
+        .service-left {
+            display: flex;
+            align-items: baseline;
+            gap: 1.6rem;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .service-index {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        .service-left h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .service-row p {
+            color: var(--text-dim);
+            max-width: 420px;
+            font-size: 0.95rem;
+        }
+
+        .service-row:hover .service-index { color: var(--accent); }
+
+        /* --- Proceso --- */
+        .process-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 900px) { .process-list { grid-template-columns: 1fr; } }
+
+        .process-step {
+            padding: 2.4rem 2rem 2.4rem 0;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+
+        .process-step:last-child { border-right: none; }
+
+        @media (max-width: 900px) {
+            .process-step { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 0; }
+        }
+
+        .process-step .pnum {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .process-step h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .process-step p { color: var(--text-dim); font-size: 0.92rem; }
+
+        /* --- Casos --- */
+        .case-note {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            max-width: 720px;
+            margin-bottom: 4rem;
+            padding: 1.4rem 1.6rem;
+            border-left: 2px solid var(--accent);
+            background: var(--surface);
+        }
+
+        .case-item {
+            display: flex;
+            gap: 4.5rem;
+            margin-bottom: 6rem;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .case-item:last-child { margin-bottom: 0; }
+
+        .case-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .case-content { flex: 1; padding: 3rem; }
+
+        .case-tag {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+        }
+
+        .case-content h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            margin: 0.8rem 0 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .case-content > p { color: var(--text-dim); margin-bottom: 1.8rem; }
+
+        .case-metrics { display: flex; gap: 2.6rem; margin-bottom: 2rem; }
+
+        .case-metrics h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .case-metrics p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            letter-spacing: 1px;
+            margin-top: 2px;
         }
 
         .btn-case {
             display: inline-block;
-            margin-top: 2.5rem;
-            padding: 0.8rem 2rem;
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            color: white;
+            padding: 0.75rem 1.6rem;
+            border: 1px solid var(--border-strong);
+            color: var(--text);
             text-decoration: none;
-            font-weight: 800;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            transition: all 0.25s;
         }
 
-        .btn-case:hover {
-            background: var(--accent);
-            box-shadow: 0 0 15px var(--accent-glow);
-            transform: scale(1.05);
-        }
-
-        /* --- Sections --- */
-        section {
-            padding: 120px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            margin-bottom: 6rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        /* --- Divs/Cards (Restaurado el estilo previo) --- */
-        .grid {
-            display: grid;
-            gap: 2rem;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        }
-
-        .card {
-            background: var(--surface);
-            padding: 4rem 3rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-10px);
-        }
-
-        .card-num {
-            font-size: 0.8rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            display: block;
-            opacity: 0.5;
-        }
-
-        .card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
-        .card p {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* --- Success Cases --- */
-        .case-item {
-            display: flex;
-            gap: 6rem;
-            margin-bottom: 10rem;
-            align-items: center;
-        }
-
-        .case-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .case-content {
-            flex: 1;
-        }
+        .btn-case:hover { border-color: var(--accent); background: var(--accent-soft); }
 
         .case-image {
-            flex: 1.2;
-            height: 450px;
-            background: var(--surface);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--border);
+            flex: 1;
+            height: 420px;
+            background: var(--surface-solid);
+            display: block;
             overflow: hidden;
-            /* Added to keep images inside rounded corners */
         }
 
         .case-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            filter: grayscale(45%) contrast(1.05);
+            transition: filter 0.4s ease, transform 0.5s ease;
         }
 
-        .case-image:hover img {
-            transform: scale(1.05);
+        .case-item:hover .case-image img {
+            filter: grayscale(0%) contrast(1.05);
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 900px) {
+            .case-item, .case-item:nth-child(even) { flex-direction: column; }
+            .case-image { width: 100%; height: 260px; }
         }
 
         /* --- Form --- */
         .form-section {
-            background: #000;
-            border-radius: 40px;
-            padding: 8rem 5%;
-            text-align: center;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 6rem 5%;
         }
 
-        .form-container {
-            max-width: 700px;
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .input-group {
-            margin-bottom: 4rem;
-            position: relative;
+        @media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+        .form-intro h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-intro p { color: var(--text-dim); margin-bottom: 2rem; max-width: 380px; }
+
+        .form-intro .contact-line {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.9rem;
+        }
+
+        .form-intro .contact-line span { color: var(--accent); }
+
+        .input-group { margin-bottom: 2.4rem; position: relative; }
+
+        .input-group label {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.7rem;
         }
 
         .input-group input,
@@ -355,345 +743,498 @@
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 2px solid var(--border);
-            padding: 1.5rem 0;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
+            border-bottom: 1px solid var(--border-strong);
+            padding: 0.7rem 0;
+            color: var(--text);
+            font-size: 1.15rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            resize: none;
         }
 
-        .input-group label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-size: 0.7rem;
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder { color: var(--text-faint); font-weight: 400; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--accent);
+            color: #14100a;
+            border: 1px solid var(--accent);
+            border-radius: var(--radius);
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            font-weight: 900;
+            letter-spacing: 1.5px;
+            font-size: 0.8rem;
+            transition: all 0.25s;
         }
 
-        /* --- Motion Graphics --- */
+        .btn-submit:hover { background: transparent; color: var(--accent); }
+
+        /* --- Motion --- */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.2, 1, 0.2, 1);
+            transform: translateY(24px);
+            transition: all 0.9s cubic-bezier(0.2, 1, 0.2, 1);
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .log-live .dot { animation: none; }
         }
 
         footer {
-            padding: 6rem 5%;
+            padding: 4rem 5% 3rem;
             border-top: 1px solid var(--border);
-            text-align: center;
         }
 
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 150px;
-            }
+        .footer-inner {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
 
-            .hero-right {
-                width: 100%;
-                height: 400px;
-            }
+        .footer-links { display: flex; gap: 2.2rem; flex-wrap: wrap; }
 
-            .case-item,
-            .case-item:nth-child(even) {
-                flex-direction: column;
-                gap: 3rem;
-            }
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.25s;
+        }
+
+        .footer-links a span { color: var(--accent); }
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-faint);
+            letter-spacing: 1px;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="cursor"></div>
-    <div id="cursor-follower"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
     <canvas id="bg-canvas"></canvas>
+    <div class="bg-fade"></div>
 
     <nav>
         <a href="#" class="nav-logo">
-            <div></div>MZACAR DEVELOPER
+            <div class="mark"></div>MZACAR<span class="sub">/ SOFTWARE ENGINEERING</span>
         </a>
         <div class="nav-links">
-            <a href="#problemas">Fricción</a>
-            <a href="#metodo">Método</a>
-            <a href="#casos">Impacto</a>
-            <a href="#contacto">Proyecto</a>
+            <a href="#problemas">Diagnóstico</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#proceso">Método</a>
+            <a href="#casos">Trabajo</a>
+            <a href="#contacto" class="nav-cta">Contactar</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-left">
-            <h1 class="reveal">Software que <span>Escala</span> tu Negocio.</h1>
-            <p class="hero-subtitle reveal" style="transition-delay: 0.2s;">
-                Ingeniería de software de alto rendimiento para PYMES que buscan automatizar su operación sin los costos
-                de las agencias tradicionales.
+            <div class="eyebrow reveal">Desarrollo de software · Neuquén / Vaca Muerta</div>
+            <h1 class="reveal" style="transition-delay:0.1s;">Tu operación<br>no para. <em>Tu software<br>tampoco debería.</em></h1>
+            <p class="hero-subtitle reveal" style="transition-delay:0.2s;">
+                Sistemas a medida para pymes de perforación, transporte y servicios petroleros en Vaca Muerta.
+                Ingeniería robusta y documentada, sin presupuestos de agencia y sin depender para siempre de un proveedor.
             </p>
-            <div class="reveal" style="transition-delay: 0.4s;">
-                <a href="#contacto" class="btn-primary">Hablemos de tu Proyecto</a>
+            <div class="hero-ctas reveal" style="transition-delay:0.3s;">
+                <a href="#contacto" class="btn-primary">Coordinar una reunión</a>
+                <a href="#casos" class="btn-ghost">Ver trabajo entregado</a>
+            </div>
+            <div class="hero-stats reveal" style="transition-delay:0.4s;">
+                <div>
+                    <h4>100%</h4>
+                    <p>Código propio del cliente</p>
+                </div>
+                <div>
+                    <h4>0</h4>
+                    <p>Mensualidades obligatorias</p>
+                </div>
+                <div>
+                    <h4>1:1</h4>
+                    <p>Trato directo, sin intermediarios</p>
+                </div>
             </div>
         </div>
-        <div class="hero-right reveal" style="transition-delay: 0.6s;">
-            <div class="video-container">
-                <video autoplay muted loop playsinline>
-                    <source
-                        src="https://res.cloudinary.com/dbsuxfwwe/video/upload/v1776987105/Robot_moving_and_202604232030_nuxqsp.mp4"
-                        type="video/mp4">
-                </video>
+
+        <div class="hero-right reveal" style="transition-delay:0.5s;">
+            <div class="log-header">
+                <span class="title">Panel de operación — demo</span>
+                <span class="log-live"><span class="dot"></span>En vivo</span>
+            </div>
+            <div class="log-body">
+                <div class="log-axis" id="log-axis"></div>
+                <div class="log-chart"><canvas id="log-canvas"></canvas></div>
+            </div>
+            <div class="log-stats">
+                <div class="log-stat">
+                    <div class="val" id="stat-depth">2,840<span> m</span></div>
+                    <div class="lbl">Profundidad</div>
+                </div>
+                <div class="log-stat">
+                    <div class="val" id="stat-pressure">2,451<span> psi</span></div>
+                    <div class="lbl">Presión</div>
+                </div>
+                <div class="log-stat">
+                    <div class="val" id="stat-rop">18.4<span> m/h</span></div>
+                    <div class="lbl">ROP</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Problemas Section -->
+    <div class="hazard-strip"></div>
+
+    <!-- Diagnóstico -->
     <section id="problemas">
         <div class="section-header reveal">
-            <h2>El costo de lo ineficiente.</h2>
+            <h2>El software genérico no entiende tu operación.</h2>
+            <p>Tres fricciones que se repiten en pymes de servicios petroleros, una y otra vez.</p>
         </div>
-        <div class="grid">
+        <div class="grid grid-3">
             <div class="card reveal">
-                <span class="card-num">01 / FINANZAS</span>
-                <h3>Presupuestos de $90M+</h3>
-                <p>Las agencias cobran fortunas por infraestructuras genéricas. Mi enfoque es la eficiencia real: alta
-                    calidad a precio de PYME.</p>
+                <span class="card-num">TIEMPO MUERTO</span>
+                <h3>Cada hora parada, cuesta</h3>
+                <p>Planillas de Excel, grupos de WhatsApp y llamados para coordinar flotas, cuadrillas y locaciones. Un sistema mal pensado termina generando más demoras de las que resuelve.</p>
             </div>
-            <div class="card reveal" style="transition-delay: 0.1s;">
-                <span class="card-num">02 / CONTROL</span>
-                <h3>Mantenimiento Eterno</h3>
-                <p>Sistemas que te atan a mensualidades innecesarias. Entrego software libre, modular y bajo tu control
-                    total.</p>
+            <div class="card reveal" style="transition-delay:0.1s;">
+                <span class="card-num">DEPENDENCIA</span>
+                <h3>Atado a un proveedor</h3>
+                <p>Presupuestos de agencia de $90M+ para sistemas genéricos, con mantenimiento eterno y sin acceso real al código. Entrego software documentado y bajo tu control.</p>
             </div>
-            <div class="card reveal" style="transition-delay: 0.2s;">
-                <span class="card-num">03 / GESTIÓN</span>
-                <h3>Fricción Operativa</h3>
-                <p>Procesos manuales que roban tiempo a tu equipo. Automatización diseñada para liberar el potencial
-                    humano.</p>
+            <div class="card reveal" style="transition-delay:0.2s;">
+                <span class="card-num">DATOS DISPERSOS</span>
+                <h3>Nadie ve el mismo número</h3>
+                <p>Stock, mantenimiento de equipos, turnos de personal y cumplimiento de HSE en planillas separadas. Sin un sistema central, cada área trabaja con su propia versión de la verdad.</p>
             </div>
         </div>
     </section>
 
-    <!-- Metodo Section -->
-    <section id="metodo">
+    <!-- Servicios -->
+    <section id="servicios">
         <div class="section-header reveal">
-            <h2>Ingeniería Directa.</h2>
+            <h2>Sistemas construidos para el ritmo del campo.</h2>
+            <p>Desarrollo a medida, pensado desde la lógica operativa de perforación, transporte y servicios asociados.</p>
         </div>
-        <div class="grid">
-            <div class="card reveal">
-                <h3>Sistemas impulsados por IA</h3>
-                <p>Implementación de agentes inteligentes para atención al cliente y procesos administrativos complejos.
-                </p>
+
+        <div class="reveal">
+            <div class="service-row">
+                <div class="service-left">
+                    <span class="service-index">A</span>
+                    <h3>Gestión de flota y logística</h3>
+                </div>
+                <p>Seguimiento de transporte de agua, arena, equipos y personal entre locaciones, con trazabilidad y reportes automáticos por unidad.</p>
             </div>
-            <div class="card reveal" style="transition-delay: 0.1s;">
-                <h3>Core Empresarial a Medida</h3>
-                <p>Desarrollo de CRMs, ERPs y sistemas de gestión de stock diseñados para tu lógica de negocio.</p>
+            <div class="service-row">
+                <div class="service-left">
+                    <span class="service-index">B</span>
+                    <h3>Control de turnos en boca de pozo</h3>
+                </div>
+                <p>Plataformas de dotación 24/7 para cuadrillas rotativas, con alertas de relevo, horas trabajadas y cumplimiento de descanso.</p>
             </div>
-            <div class="card reveal" style="transition-delay: 0.2s;">
-                <h3>Gestión de Turnos 24/7</h3>
-                <p>Plataformas de reserva automatizadas que funcionan mientras dormís, eliminando errores humanos.</p>
+            <div class="service-row">
+                <div class="service-left">
+                    <span class="service-index">C</span>
+                    <h3>Tableros de control operativo</h3>
+                </div>
+                <p>ERP a medida para stock de insumos críticos, mantenimiento preventivo de equipos y seguimiento de indicadores de HSE.</p>
+            </div>
+            <div class="service-row">
+                <div class="service-left">
+                    <span class="service-index">D</span>
+                    <h3>Integraciones y monitoreo remoto</h3>
+                </div>
+                <p>Conexión con sensores, planillas existentes y sistemas de terceros para centralizar la información en un único panel.</p>
             </div>
         </div>
     </section>
 
-    <!-- Casos Section -->
+    <div class="hazard-strip"></div>
+
+    <!-- Proceso -->
+    <section id="proceso">
+        <div class="section-header reveal">
+            <h2>Cómo se construye el sistema.</h2>
+            <p>Cuatro etapas, de punta a punta, con visibilidad total del avance.</p>
+        </div>
+        <div class="process-list reveal">
+            <div class="process-step">
+                <span class="pnum">01</span>
+                <h4>Relevamiento en campo</h4>
+                <p>Entiendo el proceso real: cómo trabaja hoy tu equipo, dónde se pierde tiempo y qué información es crítica.</p>
+            </div>
+            <div class="process-step">
+                <span class="pnum">02</span>
+                <h4>Arquitectura y prototipo</h4>
+                <p>Defino la estructura del sistema y muestro una primera versión navegable antes de escribir la lógica final.</p>
+            </div>
+            <div class="process-step">
+                <span class="pnum">03</span>
+                <h4>Desarrollo iterativo</h4>
+                <p>Entregas parciales cada semana, para validar con tu equipo y ajustar sobre la marcha, no al final.</p>
+            </div>
+            <div class="process-step">
+                <span class="pnum">04</span>
+                <h4>Entrega y capacitación</h4>
+                <p>Código documentado, capacitación al equipo y acompañamiento post-entrega. El sistema queda en tus manos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos -->
     <section id="casos">
         <div class="section-header reveal">
-            <h2>Impacto documentado.</h2>
+            <h2>Ingeniería que ya está en producción.</h2>
+            <p>Sistemas propios funcionando hoy, con usuarios reales todos los días.</p>
         </div>
+        <p class="case-note reveal">
+            Hoy enfoco mi trabajo en el sector energético de Vaca Muerta, pero el estándar de ingeniería es el mismo en cualquier industria: sistemas propios, documentados y en producción. Estos son dos ejemplos verificables.
+        </p>
         <div class="case-item reveal">
             <div class="case-content">
-                <span style="color: var(--accent); font-weight: 900; letter-spacing: 2px; font-size: 0.7rem;">CASE /
-                    MED-TECH</span>
+                <span class="case-tag">Caso / Agenda digital</span>
                 <h3>Los Olivos RX</h3>
-                <p style="color: var(--text-dim); margin-bottom: 2rem;">Digitalización total de la agenda médica. De
-                    llamadas constantes a una plataforma de reserva 100% autónoma.</p>
-                <div style="display: flex; gap: 3rem;">
-                    <div>
-                        <h4 style="font-size: 2.5rem; font-weight: 900;">80%</h4>
-                        <p style="font-size: 0.8rem; text-transform: uppercase;">Menos Carga</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 2.5rem; font-weight: 900;">24/7</h4>
-                        <p style="font-size: 0.8rem; text-transform: uppercase;">Uptime</p>
-                    </div>
+                <p>Digitalización total de la agenda médica: de llamados constantes a una plataforma de reserva de turnos operando sin intervención manual.</p>
+                <div class="case-metrics">
+                    <div><h4>80%</h4><p>Menos carga administrativa</p></div>
+                    <div><h4>24/7</h4><p>Disponibilidad del sistema</p></div>
                 </div>
-                <a href="https://www.losolivosrx.com/" target="_blank" class="btn-case">Ver Sitio Web</a>
+                <a href="https://www.losolivosrx.com/" target="_blank" rel="noopener" class="btn-case">Ver sitio en producción</a>
             </div>
-            <a href="https://www.losolivosrx.com/" target="_blank" class="case-image">
+            <a href="https://www.losolivosrx.com/" target="_blank" rel="noopener" class="case-image">
                 <img src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1776994837/La_tecnolog%C3%ADa_en_la_odontolog%C3%ADa_contempor%C3%A1nea_jflseg.jpg"
                     alt="Los Olivos RX">
             </a>
         </div>
         <div class="case-item reveal">
             <div class="case-content">
-                <span style="color: var(--accent); font-weight: 900; letter-spacing: 2px; font-size: 0.7rem;">CASE /
-                    ECOSYSTEM</span>
+                <span class="case-tag">Caso / Plataforma de gestión</span>
                 <h3>Filu App</h3>
-                <p style="color: var(--text-dim); margin-bottom: 2rem;">Plataforma integral de gestión veterinaria y
-                    cuidado de mascotas. Experiencia de usuario optimizada.</p>
-                <div style="display: flex; gap: 3rem;">
-                    <div>
-                        <h4 style="font-size: 2.5rem; font-weight: 900;">100%</h4>
-                        <p style="font-size: 0.8rem; text-transform: uppercase;">Digital</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 2.5rem; font-weight: 900;">A+</h4>
-                        <p style="font-size: 0.8rem; text-transform: uppercase;">UX Grade</p>
-                    </div>
+                <p>Plataforma integral de gestión veterinaria y cuidado de mascotas, con un flujo de usuario pensado para reducir fricción en cada paso.</p>
+                <div class="case-metrics">
+                    <div><h4>100%</h4><p>Operación digital</p></div>
+                    <div><h4>A+</h4><p>Calidad de experiencia</p></div>
                 </div>
-                <a href="https://filu.com.ar" target="_blank" class="btn-case">Ver Aplicación</a>
+                <a href="https://filu.com.ar" target="_blank" rel="noopener" class="btn-case">Ver aplicación</a>
             </div>
-            <a href="https://filu.com.ar" target="_blank" class="case-image">
+            <a href="https://filu.com.ar" target="_blank" rel="noopener" class="case-image">
                 <img src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1776994676/AI_Chatbot_Development__A_Complete_Guide_otyllw.jpg"
                     alt="Filu App">
             </a>
         </div>
     </section>
 
-    <!-- Form Section -->
+    <!-- Contacto -->
     <section id="contacto">
         <div class="form-section reveal">
-            <div class="form-container">
-                <h2 style="font-size: 3rem; margin-bottom: 4rem; font-weight: 900;">¿Hablamos de tu proyecto?</h2>
+            <div class="form-grid">
+                <div class="form-intro">
+                    <h2>Hablemos de tu operación.</h2>
+                    <p>Contame qué proceso querés ordenar o automatizar. Respondo directo, sin pasar por un equipo comercial.</p>
+                    <div class="contact-line"><span>WSP.</span> 11 3644-9593</div>
+                    <div class="contact-line"><span>IN.</span> Maximiliano Zacarias</div>
+                    <div class="contact-line"><span>BASE.</span> Operando para la región de Vaca Muerta</div>
+                </div>
                 <form id="wsp-form">
                     <div class="input-group">
-                        <label>Identificación</label>
-                        <input id="nombre" type="text" placeholder="Tu nombre o empresa" required>
+                        <label>Empresa / contacto</label>
+                        <input id="nombre" type="text" placeholder="Nombre y empresa" required>
                     </div>
                     <div class="input-group">
-                        <label>El desafío</label>
-                        <textarea id="desafio" rows="1" placeholder="¿Qué proceso quieres automatizar?" required></textarea>
+                        <label>Proceso a resolver</label>
+                        <textarea id="desafio" rows="2" placeholder="¿Qué proceso operativo querés digitalizar o automatizar?" required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; padding: 2rem;">Enviar Requerimiento</button>
+                    <button type="submit" class="btn-submit">Enviar por WhatsApp</button>
                 </form>
-
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="nav-logo" style="justify-content: center; margin-bottom: 2rem;">
-            <div></div> MZACAR
-        </div>
-        
-        <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2.5rem;">
-            <a href="https://wa.me/5491136449593" target="_blank" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s;">
-                <span style="color: var(--accent);">WSP.</span> 11 3644-9593
+        <div class="footer-inner">
+            <a href="#" class="nav-logo">
+                <div class="mark"></div>MZACAR
             </a>
-            <a href="https://www.linkedin.com/in/maximilianozacariasperfil/" target="_blank" style="color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s;">
-                <span style="color: var(--accent);">IN.</span> Maximiliano Zacarias
-            </a>
+            <div class="footer-links">
+                <a href="https://wa.me/5491136449593" target="_blank" rel="noopener"><span>WSP.</span> 11 3644-9593</a>
+                <a href="https://www.linkedin.com/in/maximilianozacariasperfil/" target="_blank" rel="noopener"><span>IN.</span> Maximiliano Zacarias</a>
+            </div>
+            <p class="footer-meta">© 2026 · Todos los derechos reservados</p>
         </div>
-
-        <p style="color: var(--text-dim); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">
-            Todos los derechos reservados • &copy; 2026
-        </p>
     </footer>
 
     <script>
-        const cursor = document.getElementById('cursor');
-        const follower = document.getElementById('cursor-follower');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-            follower.style.transform = `translate(${e.clientX - 17}px, ${e.clientY - 17}px)`;
-        });
-
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const mouse = { x: null, y: null, radius: 150 };
-
+        // Custom cursor
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+            dot.style.transform = `translate(${e.clientX - 2.5}px, ${e.clientY - 2.5}px)`;
+            ring.style.transform = `translate(${e.clientX - 13}px, ${e.clientY - 13}px)`;
+        });
+        document.querySelectorAll('a, button, input, textarea').forEach(el => {
+            el.addEventListener('mouseenter', () => ring.style.borderColor = 'var(--accent)');
+            el.addEventListener('mouseleave', () => ring.style.borderColor = 'var(--border-strong)');
         });
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.density = (Math.random() * 30) + 1;
-                this.speedX = Math.random() * 0.8 - 0.4;
-                this.speedY = Math.random() * 0.8 - 0.4;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(59, 130, 246, 1)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+        // Background: seismic contour lines
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let layers = [];
+        let t = 0;
+
+        function initBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+            layers = [];
+            const rows = 16;
+            for (let i = 0; i < rows; i++) {
+                layers.push({
+                    y: (bgCanvas.height / rows) * i + Math.random() * 40,
+                    amp: 8 + Math.random() * 22,
+                    freq: 0.002 + Math.random() * 0.003,
+                    speed: 0.15 + Math.random() * 0.3,
+                    phase: Math.random() * 1000,
+                    hue: Math.random() > 0.5 ? '92, 138, 156' : '110, 116, 122',
+                    alpha: 0.05 + Math.random() * 0.09
+                });
             }
         }
 
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 20000;
-            for (let i = 0; i < numberOfParticles; i++) particles.push(new Particle());
-        }
-
-        function connect() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 180) {
-                        let opacity = (1 - (distance / 180)) * 0.7; // Líneas bien marcadas
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-                        ctx.lineWidth = 2; // Líneas más gruesas
-                        ctx.shadowBlur = 15;
-                        ctx.shadowColor = 'rgba(59, 130, 246, 0.6)';
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                        ctx.shadowBlur = 0;
-                    }
+        function drawBg() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            layers.forEach(layer => {
+                bgCtx.beginPath();
+                bgCtx.strokeStyle = `rgba(${layer.hue}, ${layer.alpha})`;
+                bgCtx.lineWidth = 1;
+                for (let x = 0; x <= bgCanvas.width; x += 6) {
+                    const y = layer.y + Math.sin(x * layer.freq + layer.phase + t * layer.speed) * layer.amp;
+                    if (x === 0) bgCtx.moveTo(x, y); else bgCtx.lineTo(x, y);
                 }
+                bgCtx.stroke();
+            });
+            t += 0.012;
+            requestAnimationFrame(drawBg);
+        }
+
+        window.addEventListener('resize', initBg);
+        initBg();
+        drawBg();
+
+        // Hero log axis ticks
+        const axis = document.getElementById('log-axis');
+        const depths = ['0 m', '750 m', '1500 m', '2250 m', '3000 m'];
+        axis.innerHTML = depths.reverse().map(d => `<span>${d}</span>`).join('');
+
+        // Hero log waveform (simulated pressure trace)
+        const logCanvas = document.getElementById('log-canvas');
+        const logCtx = logCanvas.getContext('2d');
+        let logData = [];
+        let logT = 0;
+
+        function initLog() {
+            const rect = logCanvas.parentElement.getBoundingClientRect();
+            logCanvas.width = rect.width;
+            logCanvas.height = rect.height;
+            logData = new Array(80).fill(0.5);
+        }
+
+        function drawLog() {
+            const w = logCanvas.width, h = logCanvas.height;
+            logCtx.clearRect(0, 0, w, h);
+
+            // faint grid
+            logCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+            logCtx.lineWidth = 1;
+            for (let gy = 0; gy < h; gy += h / 6) {
+                logCtx.beginPath();
+                logCtx.moveTo(0, gy);
+                logCtx.lineTo(w, gy);
+                logCtx.stroke();
             }
+
+            logT += 0.06;
+            const last = logData[logData.length - 1];
+            const next = Math.min(0.92, Math.max(0.12,
+                last + (Math.sin(logT) * 0.02) + (Math.random() - 0.5) * 0.05));
+            logData.push(next);
+            logData.shift();
+
+            logCtx.beginPath();
+            logCtx.strokeStyle = '#e8720c';
+            logCtx.lineWidth = 1.6;
+            logData.forEach((v, i) => {
+                const x = (i / (logData.length - 1)) * w;
+                const y = h - v * h;
+                if (i === 0) logCtx.moveTo(x, y); else logCtx.lineTo(x, y);
+            });
+            logCtx.stroke();
+
+            requestAnimationFrame(drawLog);
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            connect();
-            requestAnimationFrame(animate);
-        }
+        initLog();
+        drawLog();
+        window.addEventListener('resize', initLog);
 
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        animate();
+        // Live stat readouts
+        const statDepth = document.getElementById('stat-depth');
+        const statPressure = document.getElementById('stat-pressure');
+        const statRop = document.getElementById('stat-rop');
+        setInterval(() => {
+            const depth = (2840 + Math.floor(Math.random() * 6)).toLocaleString('es-AR');
+            const pressure = (2451 + Math.floor((Math.random() - 0.5) * 20)).toLocaleString('es-AR');
+            const rop = (18.4 + (Math.random() - 0.5) * 0.6).toFixed(1);
+            statDepth.innerHTML = `${depth}<span> m</span>`;
+            statPressure.innerHTML = `${pressure}<span> psi</span>`;
+            statRop.innerHTML = `${rop}<span> m/h</span>`;
+        }, 2200);
 
+        // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-
-      document.getElementById('wsp-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nombre = document.getElementById('nombre').value.trim();
-    const desafio = document.getElementById('desafio').value.trim();
-    const mensaje = `Hola! Soy ${nombre}. Quiero automatizar: ${desafio}`;
-    window.open(`https://wa.me/5491136449593?text=${encodeURIComponent(mensaje)}`, '_blank');
-});
-  
+        // Contact form -> WhatsApp
+        document.getElementById('wsp-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value.trim();
+            const desafio = document.getElementById('desafio').value.trim();
+            const mensaje = `Hola! Soy ${nombre}. Quiero digitalizar/automatizar: ${desafio}`;
+            window.open(`https://wa.me/5491136449593?text=${encodeURIComponent(mensaje)}`, '_blank');
+        });
     </script>
 </body>
 
