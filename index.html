@@ -325,7 +325,9 @@
             position: relative;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
-            background: linear-gradient(180deg, var(--surface-solid), #0e1013);
+            background:
+                linear-gradient(180deg, rgba(10,11,13,0.35) 0%, rgba(10,11,13,0.55) 55%, rgba(10,11,13,0.92) 100%),
+                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787606608/Gemini_Generated_Image_j7fou9j7fou9j7fo_ruwhmf.jpg') center 30% / cover no-repeat;
             overflow: hidden;
         }
 
@@ -336,6 +338,8 @@
             padding: 1.1rem 1.4rem;
             border-bottom: 1px solid var(--border);
             font-family: 'IBM Plex Mono', monospace;
+            background: rgba(10, 11, 13, 0.45);
+            backdrop-filter: blur(6px);
         }
 
         .log-header .title {
@@ -351,7 +355,7 @@
             gap: 6px;
             font-size: 0.62rem;
             letter-spacing: 1.5px;
-            color: var(--accent);
+            color: var(--steel);
             text-transform: uppercase;
         }
 
@@ -359,7 +363,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--steel);
             animation: pulse 1.6s infinite ease-in-out;
         }
 
@@ -378,20 +382,33 @@
             border-right: 1px solid var(--border);
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.62rem;
-            color: var(--text-faint);
+            color: var(--text-dim);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 10px 8px;
+            background: rgba(10, 11, 13, 0.25);
         }
 
         .log-chart { flex: 1; position: relative; }
         .log-chart canvas { width: 100%; height: 100%; display: block; }
 
+        .log-caption {
+            padding: 0.7rem 1.4rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-faint);
+            letter-spacing: 0.5px;
+            background: rgba(10, 11, 13, 0.55);
+            border-top: 1px solid var(--border);
+        }
+
         .log-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             border-top: 1px solid var(--border);
+            background: rgba(10, 11, 13, 0.6);
+            backdrop-filter: blur(6px);
         }
 
         .log-stat {
@@ -865,7 +882,7 @@
             <h1 class="reveal" style="transition-delay:0.1s;">Tu operación<br>no para. <em>Tu software<br>tampoco debería.</em></h1>
             <p class="hero-subtitle reveal" style="transition-delay:0.2s;">
                 Sistemas a medida para pymes de perforación, transporte y servicios petroleros en Vaca Muerta.
-                Ingeniería robusta y documentada, sin presupuestos de agencia y sin depender para siempre de un proveedor.
+                Pensados para la realidad del campo, con o sin señal, y sin depender para siempre de un proveedor.
             </p>
             <div class="hero-ctas reveal" style="transition-delay:0.3s;">
                 <a href="#contacto" class="btn-primary">Coordinar una reunión</a>
@@ -889,8 +906,8 @@
 
         <div class="hero-right reveal" style="transition-delay:0.5s;">
             <div class="log-header">
-                <span class="title">Panel de operación — demo</span>
-                <span class="log-live"><span class="dot"></span>En vivo</span>
+                <span class="title">Panel de operación — vista conceptual</span>
+                <span class="log-live"><span class="dot"></span>Ilustrativo</span>
             </div>
             <div class="log-body">
                 <div class="log-axis" id="log-axis"></div>
@@ -910,6 +927,7 @@
                     <div class="lbl">ROP</div>
                 </div>
             </div>
+            <div class="log-caption">Ejemplo de panel de control · los datos que verías dependen de cómo se cargue y sincronice la información en tu operación.</div>
         </div>
     </section>
 
@@ -972,9 +990,9 @@
             <div class="service-row">
                 <div class="service-left">
                     <span class="service-index">D</span>
-                    <h3>Integraciones y monitoreo remoto</h3>
+                    <h3>Aplicaciones offline-first</h3>
                 </div>
-                <p>Conexión con sensores, planillas existentes y sistemas de terceros para centralizar la información en un único panel.</p>
+                <p>Carga de datos en locación sin depender de señal constante: la app guarda localmente y sincroniza sola apenas hay conexión. Pensado para la realidad del campo, no para una oficina con wifi.</p>
             </div>
         </div>
     </section>
