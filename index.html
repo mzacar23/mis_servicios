@@ -205,6 +205,11 @@
             align-items: center;
             padding: 130px 5% 60px;
             gap: 4.5rem;
+            position: relative;
+            background:
+                linear-gradient(90deg, rgba(10,11,13,0.97) 0%, rgba(10,11,13,0.9) 32%, rgba(10,11,13,0.55) 62%, rgba(10,11,13,0.4) 100%),
+                linear-gradient(0deg, rgba(10,11,13,0.95) 0%, rgba(10,11,13,0.1) 30%, rgba(10,11,13,0.1) 75%, rgba(10,11,13,0.95) 100%),
+                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787606608/Gemini_Generated_Image_j7fou9j7fou9j7fo_ruwhmf.jpg') center 38% / cover no-repeat;
         }
 
         .hero-left { flex: 1.05; z-index: 2; }
@@ -324,10 +329,9 @@
             flex: 1;
             position: relative;
             border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            background:
-                linear-gradient(180deg, rgba(10,11,13,0.35) 0%, rgba(10,11,13,0.55) 55%, rgba(10,11,13,0.92) 100%),
-                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787606608/Gemini_Generated_Image_j7fou9j7fou9j7fo_ruwhmf.jpg') center 30% / cover no-repeat;
+            border: 1px solid var(--border-strong);
+            background: rgba(14, 15, 18, 0.6);
+            backdrop-filter: blur(14px);
             overflow: hidden;
         }
 
@@ -338,8 +342,6 @@
             padding: 1.1rem 1.4rem;
             border-bottom: 1px solid var(--border);
             font-family: 'IBM Plex Mono', monospace;
-            background: rgba(10, 11, 13, 0.45);
-            backdrop-filter: blur(6px);
         }
 
         .log-header .title {
@@ -373,25 +375,75 @@
         }
 
         .log-body {
-            display: flex;
-            height: 330px;
+            padding: 1.4rem 1.4rem 0;
         }
 
-        .log-axis {
-            width: 56px;
-            border-right: 1px solid var(--border);
+        .chart-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 0.7rem;
+        }
+
+        .chart-main {
+            margin-bottom: 1.4rem;
+        }
+
+        .chart-main canvas {
+            width: 100%;
+            height: 120px;
+            display: block;
+        }
+
+        .chart-row {
+            display: flex;
+            gap: 1.1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .chart-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+        }
+
+        .donut-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .donut-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.62rem;
             color: var(--text-dim);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px 8px;
-            background: rgba(10, 11, 13, 0.25);
         }
 
-        .log-chart { flex: 1; position: relative; }
-        .log-chart canvas { width: 100%; height: 100%; display: block; }
+        .donut-legend span {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .donut-legend i {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .chart-box canvas#bar-canvas {
+            width: 100%;
+            height: 100px;
+            display: block;
+        }
 
         .log-caption {
             padding: 0.7rem 1.4rem;
@@ -399,7 +451,6 @@
             font-size: 0.6rem;
             color: var(--text-faint);
             letter-spacing: 0.5px;
-            background: rgba(10, 11, 13, 0.55);
             border-top: 1px solid var(--border);
         }
 
@@ -407,8 +458,6 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             border-top: 1px solid var(--border);
-            background: rgba(10, 11, 13, 0.6);
-            backdrop-filter: blur(6px);
         }
 
         .log-stat {
@@ -882,7 +931,7 @@
             <h1 class="reveal" style="transition-delay:0.1s;">Tu operación<br>no para. <em>Tu software<br>tampoco debería.</em></h1>
             <p class="hero-subtitle reveal" style="transition-delay:0.2s;">
                 Sistemas a medida para pymes de perforación, transporte y servicios petroleros en Vaca Muerta.
-                Pensados para la realidad del campo, con o sin señal, y sin depender para siempre de un proveedor.
+                Ingeniería robusta y documentada, sin presupuestos de agencia y sin depender para siempre de un proveedor.
             </p>
             <div class="hero-ctas reveal" style="transition-delay:0.3s;">
                 <a href="#contacto" class="btn-primary">Coordinar una reunión</a>
@@ -906,28 +955,47 @@
 
         <div class="hero-right reveal" style="transition-delay:0.5s;">
             <div class="log-header">
-                <span class="title">Panel de operación — vista conceptual</span>
+                <span class="title">Panel de gestión — vista conceptual</span>
                 <span class="log-live"><span class="dot"></span>Ilustrativo</span>
             </div>
             <div class="log-body">
-                <div class="log-axis" id="log-axis"></div>
-                <div class="log-chart"><canvas id="log-canvas"></canvas></div>
+                <div class="chart-main">
+                    <div class="chart-label">Actividad operativa · últimas 8 semanas</div>
+                    <canvas id="trend-canvas"></canvas>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-box">
+                        <div class="chart-label">Estado de flota</div>
+                        <div class="donut-wrap">
+                            <canvas id="donut-canvas" width="86" height="86"></canvas>
+                            <div class="donut-legend">
+                                <span><i style="background:var(--accent)"></i>En ruta</span>
+                                <span><i style="background:var(--steel)"></i>Depósito</span>
+                                <span><i style="background:var(--text-faint)"></i>Taller</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-label">Órdenes por semana</div>
+                        <canvas id="bar-canvas"></canvas>
+                    </div>
+                </div>
             </div>
             <div class="log-stats">
                 <div class="log-stat">
-                    <div class="val" id="stat-depth">2,840<span> m</span></div>
-                    <div class="lbl">Profundidad</div>
+                    <div class="val">128</div>
+                    <div class="lbl">Órdenes activas</div>
                 </div>
                 <div class="log-stat">
-                    <div class="val" id="stat-pressure">2,451<span> psi</span></div>
-                    <div class="lbl">Presión</div>
+                    <div class="val">96<span>%</span></div>
+                    <div class="lbl">Cumplimiento</div>
                 </div>
                 <div class="log-stat">
-                    <div class="val" id="stat-rop">18.4<span> m/h</span></div>
-                    <div class="lbl">ROP</div>
+                    <div class="val">3</div>
+                    <div class="lbl">Alertas</div>
                 </div>
             </div>
-            <div class="log-caption">Ejemplo de panel de control · los datos que verías dependen de cómo se cargue y sincronice la información en tu operación.</div>
+            <div class="log-caption">Ejemplo de panel de gestión · la estructura se adapta a los procesos reales de tu operación.</div>
         </div>
     </section>
 
@@ -990,9 +1058,9 @@
             <div class="service-row">
                 <div class="service-left">
                     <span class="service-index">D</span>
-                    <h3>Aplicaciones offline-first</h3>
+                    <h3>Tableros y reportes de gestión</h3>
                 </div>
-                <p>Carga de datos en locación sin depender de señal constante: la app guarda localmente y sincroniza sola apenas hay conexión. Pensado para la realidad del campo, no para una oficina con wifi.</p>
+                <p>Paneles a medida para ver de un vistazo el estado de la operación: órdenes, flota, stock y cumplimiento, con reportes automáticos para tomar decisiones más rápido.</p>
             </div>
         </div>
     </section>
@@ -1168,74 +1236,140 @@
         initBg();
         drawBg();
 
-        // Hero log axis ticks
-        const axis = document.getElementById('log-axis');
-        const depths = ['0 m', '750 m', '1500 m', '2250 m', '3000 m'];
-        axis.innerHTML = depths.reverse().map(d => `<span>${d}</span>`).join('');
+        // Hero panel: trend chart (operational activity, generic)
+        const trendCanvas = document.getElementById('trend-canvas');
+        const trendCtx = trendCanvas.getContext('2d');
+        let trendData = [];
+        let trendT = 0;
 
-        // Hero log waveform (simulated pressure trace)
-        const logCanvas = document.getElementById('log-canvas');
-        const logCtx = logCanvas.getContext('2d');
-        let logData = [];
-        let logT = 0;
-
-        function initLog() {
-            const rect = logCanvas.parentElement.getBoundingClientRect();
-            logCanvas.width = rect.width;
-            logCanvas.height = rect.height;
-            logData = new Array(80).fill(0.5);
+        function initTrend() {
+            const rect = trendCanvas.getBoundingClientRect();
+            trendCanvas.width = rect.width;
+            trendCanvas.height = rect.height;
+            trendData = new Array(60).fill(0.5);
         }
 
-        function drawLog() {
-            const w = logCanvas.width, h = logCanvas.height;
-            logCtx.clearRect(0, 0, w, h);
+        function drawTrend() {
+            const w = trendCanvas.width, h = trendCanvas.height;
+            if (!w || !h) { requestAnimationFrame(drawTrend); return; }
+            trendCtx.clearRect(0, 0, w, h);
 
-            // faint grid
-            logCtx.strokeStyle = 'rgba(255,255,255,0.05)';
-            logCtx.lineWidth = 1;
-            for (let gy = 0; gy < h; gy += h / 6) {
-                logCtx.beginPath();
-                logCtx.moveTo(0, gy);
-                logCtx.lineTo(w, gy);
-                logCtx.stroke();
+            trendCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+            trendCtx.lineWidth = 1;
+            for (let gy = 0; gy < h; gy += h / 4) {
+                trendCtx.beginPath();
+                trendCtx.moveTo(0, gy);
+                trendCtx.lineTo(w, gy);
+                trendCtx.stroke();
             }
 
-            logT += 0.06;
-            const last = logData[logData.length - 1];
-            const next = Math.min(0.92, Math.max(0.12,
-                last + (Math.sin(logT) * 0.02) + (Math.random() - 0.5) * 0.05));
-            logData.push(next);
-            logData.shift();
+            trendT += 0.05;
+            const last = trendData[trendData.length - 1];
+            const next = Math.min(0.88, Math.max(0.18,
+                last + Math.sin(trendT) * 0.015 + (Math.random() - 0.5) * 0.05));
+            trendData.push(next);
+            trendData.shift();
 
-            logCtx.beginPath();
-            logCtx.strokeStyle = '#e8720c';
-            logCtx.lineWidth = 1.6;
-            logData.forEach((v, i) => {
-                const x = (i / (logData.length - 1)) * w;
+            const grad = trendCtx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, 'rgba(232,114,12,0.35)');
+            grad.addColorStop(1, 'rgba(232,114,12,0)');
+
+            trendCtx.beginPath();
+            trendData.forEach((v, i) => {
+                const x = (i / (trendData.length - 1)) * w;
                 const y = h - v * h;
-                if (i === 0) logCtx.moveTo(x, y); else logCtx.lineTo(x, y);
+                if (i === 0) trendCtx.moveTo(x, y); else trendCtx.lineTo(x, y);
             });
-            logCtx.stroke();
+            trendCtx.lineTo(w, h);
+            trendCtx.lineTo(0, h);
+            trendCtx.closePath();
+            trendCtx.fillStyle = grad;
+            trendCtx.fill();
 
-            requestAnimationFrame(drawLog);
+            trendCtx.beginPath();
+            trendCtx.strokeStyle = '#e8720c';
+            trendCtx.lineWidth = 1.8;
+            trendData.forEach((v, i) => {
+                const x = (i / (trendData.length - 1)) * w;
+                const y = h - v * h;
+                if (i === 0) trendCtx.moveTo(x, y); else trendCtx.lineTo(x, y);
+            });
+            trendCtx.stroke();
+
+            requestAnimationFrame(drawTrend);
         }
 
-        initLog();
-        drawLog();
-        window.addEventListener('resize', initLog);
+        initTrend();
+        drawTrend();
+        window.addEventListener('resize', initTrend);
 
-        // Live stat readouts
-        const statDepth = document.getElementById('stat-depth');
-        const statPressure = document.getElementById('stat-pressure');
-        const statRop = document.getElementById('stat-rop');
-        setInterval(() => {
-            const depth = (2840 + Math.floor(Math.random() * 6)).toLocaleString('es-AR');
-            const pressure = (2451 + Math.floor((Math.random() - 0.5) * 20)).toLocaleString('es-AR');
-            const rop = (18.4 + (Math.random() - 0.5) * 0.6).toFixed(1);
-            statDepth.innerHTML = `${depth}<span> m</span>`;
-            statPressure.innerHTML = `${pressure}<span> psi</span>`;
-            statRop.innerHTML = `${rop}<span> m/h</span>`;
-        }, 2200);
+        // Hero panel: donut chart (fleet status, generic)
+        const donutCanvas = document.getElementById('donut-canvas');
+        const donutCtx = donutCanvas.getContext('2d');
+        const donutSegments = [
+            { value: 0.46, color: '#e8720c' },
+            { value: 0.34, color: '#5c8a9c' },
+            { value: 0.20, color: '#565b62' }
+        ];
+
+        function drawDonut(progress) {
+            const w = donutCanvas.width, h = donutCanvas.height;
+            const cx = w / 2, cy = h / 2, r = Math.min(w, h) / 2 - 6;
+            donutCtx.clearRect(0, 0, w, h);
+            let start = -Math.PI / 2;
+            donutSegments.forEach(seg => {
+                const sweep = seg.value * Math.PI * 2 * progress;
+                donutCtx.beginPath();
+                donutCtx.arc(cx, cy, r, start, start + sweep);
+                donutCtx.strokeStyle = seg.color;
+                donutCtx.lineWidth = 12;
+                donutCtx.stroke();
+                start += sweep;
+            });
+        }
+
+        let donutProgress = 0;
+        function animateDonut() {
+            donutProgress += 0.02;
+            drawDonut(Math.min(1, donutProgress));
+            if (donutProgress < 1) requestAnimationFrame(animateDonut);
+        }
+        animateDonut();
+
+        // Hero panel: bar chart (weekly orders, generic)
+        const barCanvas = document.getElementById('bar-canvas');
+        const barCtx = barCanvas.getContext('2d');
+        const barValues = [0.5, 0.65, 0.4, 0.78, 0.6, 0.9];
+
+        function initBar() {
+            const rect = barCanvas.getBoundingClientRect();
+            barCanvas.width = rect.width;
+            barCanvas.height = rect.height;
+        }
+
+        function drawBars(progress) {
+            const w = barCanvas.width, h = barCanvas.height;
+            barCtx.clearRect(0, 0, w, h);
+            const gap = 8;
+            const barW = (w - gap * (barValues.length - 1)) / barValues.length;
+            barValues.forEach((v, i) => {
+                const barH = v * h * progress;
+                const x = i * (barW + gap);
+                const y = h - barH;
+                barCtx.fillStyle = i === barValues.length - 1 ? '#e8720c' : 'rgba(92,138,156,0.55)';
+                barCtx.fillRect(x, y, barW, barH);
+            });
+        }
+
+        let barProgress = 0;
+        function animateBars() {
+            barProgress += 0.025;
+            drawBars(Math.min(1, barProgress));
+            if (barProgress < 1) requestAnimationFrame(animateBars);
+        }
+        initBar();
+        animateBars();
+        window.addEventListener('resize', () => { initBar(); drawBars(1); });
 
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
