@@ -223,7 +223,7 @@
             background:
                 linear-gradient(90deg, rgba(10,11,13,0.97) 0%, rgba(10,11,13,0.9) 32%, rgba(10,11,13,0.55) 62%, rgba(10,11,13,0.4) 100%),
                 linear-gradient(0deg, rgba(10,11,13,0.95) 0%, rgba(10,11,13,0.1) 30%, rgba(10,11,13,0.1) 75%, rgba(10,11,13,0.95) 100%),
-                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787606608/Gemini_Generated_Image_j7fou9j7fou9j7fo_ruwhmf.jpg') center 38% / cover no-repeat;
+                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787695749/Gemini_Generated_Image_7tsi7h7tsi7h7tsi_fqomyh.jpg') center 38% / cover no-repeat;
         }
 
         .hero-left { flex: 1.05; z-index: 2; }
@@ -526,7 +526,7 @@
             background:
                 linear-gradient(0deg, rgba(10,11,13,0.98) 0%, rgba(10,11,13,0.55) 20%, rgba(10,11,13,0.55) 80%, rgba(10,11,13,0.98) 100%),
                 linear-gradient(90deg, rgba(10,11,13,0.55) 0%, rgba(10,11,13,0.15) 50%, rgba(10,11,13,0.55) 100%),
-                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787695749/Gemini_Generated_Image_7tsi7h7tsi7h7tsi_fqomyh.jpg') center 40% / cover no-repeat;
+                url('https://res.cloudinary.com/dbsuxfwwe/image/upload/v1787606608/Gemini_Generated_Image_j7fou9j7fou9j7fo_ruwhmf.jpg') center 40% / cover no-repeat;
             text-align: center;
         }
 
@@ -591,6 +591,27 @@
             color: var(--text-dim);
             max-width: 380px;
             font-size: 0.98rem;
+        }
+
+        /* --- Diagnóstico: pipeline-flow ambient effect --- */
+        #problemas {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #flow-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #problemas .section-header,
+        #problemas .grid {
+            position: relative;
+            z-index: 1;
         }
 
         /* --- Cards --- */
@@ -1015,10 +1036,9 @@
     <section class="hero">
         <div class="hero-left">
             <div class="eyebrow reveal">Desarrollo de software · Neuquén / Vaca Muerta</div>
-            <h1 class="reveal" style="transition-delay:0.1s;">Tu operación<br>no para. <em>Tu software<br>tampoco debería.</em></h1>
+            <h1 class="reveal" style="transition-delay:0.1s;">Tu operación en<br>Vaca Muerta no para.<br><em>Tu software tampoco<br>debería.</em></h1>
             <p class="hero-subtitle reveal" style="transition-delay:0.2s;">
-                Sistemas a medida para pymes de perforación, transporte y servicios petroleros en Vaca Muerta.
-                Ingeniería robusta y documentada, sin presupuestos de agencia y sin depender para siempre de un proveedor.
+                Software a medida y automatización con Inteligencia Artificial para pymes de perforación, transporte y servicios en Vaca Muerta. Ingeniería seria, a precio de pyme — sin presupuestos de agencia ni ataduras eternas.
             </p>
             <div class="hero-ctas reveal" style="transition-delay:0.3s;">
                 <a href="#contacto" class="btn-primary">Coordinar una reunión</a>
@@ -1098,6 +1118,7 @@
 
     <div class="hazard-strip"></div>
     <section id="problemas">
+        <canvas id="flow-canvas"></canvas>
         <div class="section-header reveal">
             <h2>El software genérico no entiende tu operación.</h2>
             <p>Tres fricciones que se repiten en pymes de servicios petroleros, una y otra vez.</p>
@@ -1124,7 +1145,7 @@
     <!-- Servicios -->
     <section id="servicios">
         <div class="section-header reveal">
-            <h2>Sistemas construidos para el ritmo del campo.</h2>
+            <h2>Sistemas para tu operación en Vaca Muerta.</h2>
             <p>Desarrollo a medida, pensado desde la lógica operativa de perforación, transporte y servicios asociados.</p>
         </div>
 
@@ -1178,7 +1199,7 @@
         <div class="process-list reveal">
             <div class="process-step">
                 <span class="pnum">01</span>
-                <h4>Relevamiento en campo</h4>
+                <h4>Relevamiento en sitio</h4>
                 <p>Entiendo el proceso real: cómo trabaja hoy tu equipo, dónde se pierde tiempo y qué información es crítica.</p>
             </div>
             <div class="process-step">
@@ -1206,24 +1227,8 @@
             <p>Sistemas propios funcionando hoy, con usuarios reales todos los días.</p>
         </div>
         <p class="case-note reveal">
-            Hoy enfoco mi trabajo en el sector energético de Vaca Muerta, pero el estándar de ingeniería es el mismo en cualquier industria: sistemas propios, documentados y en producción. Estos son dos ejemplos verificables.
+            Hoy enfoco mi trabajo en el sector energético de Vaca Muerta, pero el estándar de ingeniería es el mismo en cualquier industria: sistemas propios, documentados y en producción. Este es un ejemplo verificable.
         </p>
-        <div class="case-item reveal">
-            <div class="case-content">
-                <span class="case-tag">Caso / Agenda digital</span>
-                <h3>Los Olivos RX</h3>
-                <p>Digitalización total de la agenda médica: de llamados constantes a una plataforma de reserva de turnos operando sin intervención manual.</p>
-                <div class="case-metrics">
-                    <div><h4>80%</h4><p>Menos carga administrativa</p></div>
-                    <div><h4>24/7</h4><p>Disponibilidad del sistema</p></div>
-                </div>
-                <a href="https://www.losolivosrx.com/" target="_blank" rel="noopener" class="btn-case">Ver sitio en producción</a>
-            </div>
-            <a href="https://www.losolivosrx.com/" target="_blank" rel="noopener" class="case-image">
-                <img src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1776994837/La_tecnolog%C3%ADa_en_la_odontolog%C3%ADa_contempor%C3%A1nea_jflseg.jpg"
-                    alt="Los Olivos RX">
-            </a>
-        </div>
         <div class="case-item reveal">
             <div class="case-content">
                 <span class="case-tag">Caso / Plataforma de gestión</span>
@@ -1502,6 +1507,92 @@
         initBar();
         animateBars();
         window.addEventListener('resize', () => { initBar(); drawBars(1); });
+
+        // Diagnóstico: pipeline-flow ambient effect (oil & gas motif, image-matched palette)
+        const flowCanvas = document.getElementById('flow-canvas');
+        const flowCtx = flowCanvas.getContext('2d');
+        let flowLines = [];
+        let flowParticles = [];
+
+        function initFlow() {
+            const section = document.getElementById('problemas');
+            const rect = section.getBoundingClientRect();
+            flowCanvas.width = rect.width;
+            flowCanvas.height = rect.height;
+
+            const rows = 7;
+            flowLines = [];
+            for (let i = 0; i < rows; i++) {
+                flowLines.push({
+                    y: (flowCanvas.height / (rows + 1)) * (i + 1) + (Math.random() - 0.5) * 30,
+                    wobble: 6 + Math.random() * 10,
+                    freq: 0.003 + Math.random() * 0.002
+                });
+            }
+
+            flowParticles = [];
+            flowLines.forEach((line, li) => {
+                const count = 2 + Math.floor(Math.random() * 2);
+                for (let i = 0; i < count; i++) {
+                    const isAmber = Math.random() < 0.16;
+                    flowParticles.push({
+                        line: li,
+                        x: Math.random() * flowCanvas.width,
+                        speed: 0.4 + Math.random() * 0.7,
+                        size: isAmber ? 2.2 : 1.6 + Math.random() * 1.2,
+                        color: isAmber ? '232,114,12' : (Math.random() < 0.5 ? '92,138,156' : '126,200,227'),
+                        glow: isAmber ? 0.9 : 0.55
+                    });
+                }
+            });
+        }
+
+        function drawFlow() {
+            const w = flowCanvas.width, h = flowCanvas.height;
+            if (!w || !h) { requestAnimationFrame(drawFlow); return; }
+            flowCtx.clearRect(0, 0, w, h);
+
+            // faint pipeline guide lines
+            flowLines.forEach(line => {
+                flowCtx.beginPath();
+                flowCtx.strokeStyle = 'rgba(92,138,156,0.07)';
+                flowCtx.lineWidth = 1;
+                flowCtx.moveTo(0, line.y);
+                flowCtx.lineTo(w, line.y);
+                flowCtx.stroke();
+            });
+
+            const now = Date.now() * 0.001;
+
+            flowParticles.forEach(p => {
+                const line = flowLines[p.line];
+                const y = line.y + Math.sin(now * line.freq * 60 + p.x * 0.01) * line.wobble;
+
+                p.x += p.speed;
+                if (p.x > w + 20) p.x = -20;
+
+                // trailing glow
+                const grad = flowCtx.createRadialGradient(p.x, y, 0, p.x, y, p.size * 6);
+                grad.addColorStop(0, `rgba(${p.color}, ${p.glow})`);
+                grad.addColorStop(1, `rgba(${p.color}, 0)`);
+                flowCtx.fillStyle = grad;
+                flowCtx.beginPath();
+                flowCtx.arc(p.x, y, p.size * 6, 0, Math.PI * 2);
+                flowCtx.fill();
+
+                // core dot
+                flowCtx.beginPath();
+                flowCtx.fillStyle = `rgba(${p.color}, 0.9)`;
+                flowCtx.arc(p.x, y, p.size, 0, Math.PI * 2);
+                flowCtx.fill();
+            });
+
+            requestAnimationFrame(drawFlow);
+        }
+
+        initFlow();
+        drawFlow();
+        window.addEventListener('resize', initFlow);
 
         // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
