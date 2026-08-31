@@ -566,6 +566,74 @@
             .vision-section { padding: 110px 6%; }
         }
 
+        /* --- Media showcase: video + screenshot, after vision statement --- */
+        .media-section {
+            padding: 0 5% 130px;
+            max-width: 1360px;
+            margin: 0 auto;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 1.6rem;
+        }
+
+        @media (max-width: 900px) {
+            .media-grid { grid-template-columns: 1fr; }
+        }
+
+        .media-frame {
+            position: relative;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-lg);
+            background: var(--surface-solid);
+            overflow: hidden;
+        }
+
+        .media-frame-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .media-frame-header .tag {
+            color: var(--accent);
+        }
+
+        .media-body {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .media-body video,
+        .media-body img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .media-frame-caption {
+            padding: 0.8rem 1.2rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-faint);
+            letter-spacing: 0.5px;
+            border-top: 1px solid var(--border);
+        }
+
         /* --- Sections --- */
         section { padding: 130px 5%; max-width: 1360px; margin: 0 auto; }
 
@@ -1113,6 +1181,43 @@
             <h2>El software inteligente <em>no es solo para las grandes operadoras.</em></h2>
             <p>Tu pyme también puede tener un sistema que ordene la operación diaria, muestre lo que realmente importa y te dé información confiable para decidir &mdash; no a ojo, con datos.</p>
             <a href="#servicios" class="btn-ghost" style="color:var(--text);">Ver cómo funciona</a>
+        </div>
+    </section>
+
+    <!-- Media: video + captura del panel, referencia visual del producto -->
+    <section class="media-section">
+        <div class="media-grid">
+            <div class="media-frame reveal">
+                <div class="media-frame-header">
+                    <span>Demostración en video</span>
+                    <span class="tag">Referencia</span>
+                </div>
+                <div class="media-body">
+                    <video
+                        src="https://res.cloudinary.com/dbsuxfwwe/video/upload/v1788138016/Video_Project_kmlw6n.mp4"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        disablepictureinpicture
+                        controlslist="nodownload noplaybackrate nofullscreen"
+                        preload="metadata">
+                    </video>
+                </div>
+                <div class="media-frame-caption">Vista general de un sistema en funcionamiento · sin sonido, en loop.</div>
+            </div>
+            <div class="media-frame reveal" style="transition-delay:0.1s;">
+                <div class="media-frame-header">
+                    <span>Captura de panel</span>
+                    <span class="tag">Referencia</span>
+                </div>
+                <div class="media-body">
+                    <img
+                        src="https://res.cloudinary.com/dbsuxfwwe/image/upload/v1788138241/Captura_de_pantalla_2026-08-30_171557_fqatqq.png"
+                        alt="Captura de un panel de gestión operativa">
+                </div>
+                <div class="media-frame-caption">Ejemplo real de interfaz · la estructura se adapta a tu operación.</div>
+            </div>
         </div>
     </section>
 
